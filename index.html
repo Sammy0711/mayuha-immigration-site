@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayuha Japan Gateway - AI-Powered Immigration Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6B7FD7 0%, #4A5FC1 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 60px 40px;
+            margin: 40px auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            color: #6B7FD7;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .intro-section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            gap: 20px;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 30px;
+            background: linear-gradient(135deg, #6B7FD7 0%, #00D4AA 100%);
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1.1em;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #6B7FD7;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(107, 127, 215, 0.2);
+        }
+
+        .service-card h3 {
+            color: #6B7FD7;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .service-card .price {
+            font-size: 1.5em;
+            color: #00D4AA;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .service-card .description {
+            color: #666;
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .service-card ul li {
+            padding: 8px 0;
+            color: #555;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .service-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00D4AA;
+            font-weight: bold;
+        }
+
+        .paypal-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #0070BA 0%, #1546A0 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .paypal-button:hover {
+            background: linear-gradient(135deg, #005A94 0%, #0F3A7F 100%);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,112,186,0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #333;
+            margin: 60px 0 40px 0;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #6B7FD7, #00D4AA);
+            border-radius: 2px;
+        }
+
+        .ai-feature {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .ai-feature h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .ai-feature p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .footer a {
+            color: #00D4AA;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1.1em;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🌸 Mayuha Japan Gateway</h1>
+        <p>AI-Powered Immigration & Visa Services</p>
+        <p>Licensed Administrative Scrivener (行政書士) in Osaka</p>
+        <div class="ai-badge">🤖 Japan's First AI-Integrated Immigration Office</div>
+    </header>
+
+    <div class="container">
+        <section class="intro-section">
+            <h2>Welcome to the Future of Immigration Services</h2>
+            <p>Combining 15+ years of professional expertise with cutting-edge AI technology, we provide the most efficient, accurate, and transparent visa application services in Japan.</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3>500+</h3>
+                    <p>Successful Applications</p>
+                </div>
+                <div class="stat-item">
+                    <h3>95%</h3>
+                    <p>Success Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>15+</h3>
+                    <p>Years Experience</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="ai-feature">
+            <h2>🚀 Powered by AI Technology</h2>
+            <p>We leverage ChatGPT, Claude, and Midjourney to create comprehensive business plans, visualize concepts, and ensure accuracy in every document. Watch our transparent process and see how AI enhances traditional legal services.</p>
+        </div>
+
+        <h2 class="section-title">Our Comprehensive Services</h2>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>🎯 Japan Work Visa Consulting</h3>
+                <div class="price">From ¥80,000</div>
+                <div class="description">Comprehensive support for obtaining work visas in Japan, including Engineer/Specialist in Humanities/International Services visa.</div>
+                <ul>
+                    <li>Document preparation and review</li>
+                    <li>Application strategy consultation</li>
+                    <li>Immigration bureau liaison</li>
+                    <li>AI-generated supporting materials</li>
+                    <li>English/Japanese support</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/80000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🌟 Highly Skilled Professional (HSP) Visa</h3>
+                <div class="price">From ¥120,000</div>
+                <div class="description">Fast-track visa for highly qualified professionals with point-based system evaluation and premium benefits.</div>
+                <ul>
+                    <li>Point calculation and optimization</li>
+                    <li>Document certification support</li>
+                    <li>Application preparation</li>
+                    <li>Family visa coordination</li>
+                    <li>PR pathway guidance</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/120000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>👨‍👩‍👧 Family & Spouse Visa Support</h3>
+                <div class="price">From ¥70,000</div>
+                <div class="description">Reunite with your loved ones in Japan through our comprehensive family visa application services.</div>
+                <ul>
+                    <li>Spouse visa applications</li>
+                    <li>Dependent visa processing</li>
+                    <li>Relationship documentation</li>
+                    <li>Financial proof assistance</li>
+                    <li>Interview preparation</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/70000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🏠 Permanent Residence Application</h3>
+                <div class="price">From ¥150,000</div>
+                <div class="description">Achieve permanent residency status in Japan with our expert guidance through the complex application process.</div>
+                <ul>
+                    <li>Eligibility assessment</li>
+                    <li>Complete document preparation</li>
+                    <li>Tax and insurance verification</li>
+                    <li>Application submission</li>
+                    <li>Follow-up support</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/150000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🎓 Student Visa Services</h3>
+                <div class="price">From ¥60,000</div>
+                <div class="description">Start your educational journey in Japan with comprehensive student visa application support.</div>
+                <ul>
+                    <li>COE application assistance</li>
+                    <li>School enrollment support</li>
+                    <li>Financial documentation</li>
+                    <li>Part-time work permission</li>
+                    <li>Visa extension guidance</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/60000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>💼 Business Manager Visa</h3>
+                <div class="price">From ¥200,000</div>
+                <div class="description">Establish and manage your business in Japan with our comprehensive business manager visa services.</div>
+                <ul>
+                    <li>Business plan creation (AI-enhanced)</li>
+                    <li>Company registration support</li>
+                    <li>Office requirements guidance</li>
+                    <li>Investment verification</li>
+                    <li>Application processing</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/200000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🔄 Visa Change & Extension</h3>
+                <div class="price">From ¥50,000</div>
+                <div class="description">Seamlessly change or extend your current visa status with our efficient processing services.</div>
+                <ul>
+                    <li>Status of residence changes</li>
+                    <li>Extension applications</li>
+                    <li>Document updates</li>
+                    <li>Quick turnaround service</li>
+                    <li>Immigration office liaison</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/50000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🌏 Investor Visa Package</h3>
+                <div class="price">From ¥180,000</div>
+                <div class="description">Comprehensive support for investors looking to establish business operations in Japan.</div>
+                <ul>
+                    <li>Investment strategy consultation</li>
+                    <li>Company establishment</li>
+                    <li>Bank account opening support</li>
+                    <li>Visa application processing</li>
+                    <li>Ongoing compliance support</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/180000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🏢 Corporate Immigration Solutions</h3>
+                <div class="price">From ¥100,000</div>
+                <div class="description">Streamlined immigration services for companies hiring foreign talent in Japan.</div>
+                <ul>
+                    <li>Multiple employee processing</li>
+                    <li>Compliance management</li>
+                    <li>Certificate of Eligibility bulk processing</li>
+                    <li>Monthly retainer options</li>
+                    <li>HR coordination</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/100000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>📋 Naturalization (Japanese Citizenship)</h3>
+                <div class="price">From ¥250,000</div>
+                <div class="description">Become a Japanese citizen with our comprehensive naturalization application support.</div>
+                <ul>
+                    <li>Eligibility consultation</li>
+                    <li>Document preparation (extensive)</li>
+                    <li>Interview preparation</li>
+                    <li>Legal Affairs Bureau coordination</li>
+                    <li>Long-term application support</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/250000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🎨 Artist & Cultural Activities Visa</h3>
+                <div class="price">From ¥90,000</div>
+                <div class="description">Specialized support for artists, performers, and cultural professionals seeking to work in Japan.</div>
+                <ul>
+                    <li>Portfolio preparation</li>
+                    <li>Sponsorship coordination</li>
+                    <li>Activity plan documentation</li>
+                    <li>Contract review</li>
+                    <li>Application submission</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/90000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>💍 Marriage & Registration Services</h3>
+                <div class="price">From ¥80,000</div>
+                <div class="description">Complete support for marriage registration and related visa applications for international couples.</div>
+                <ul>
+                    <li>Marriage registration assistance</li>
+                    <li>Document translation & certification</li>
+                    <li>Embassy coordination</li>
+                    <li>Spouse visa application</li>
+                    <li>Name change procedures</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/80000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>📄 Document Translation & Certification</h3>
+                <div class="price">From ¥15,000</div>
+                <div class="description">Professional translation and certification services for all immigration-related documents.</div>
+                <ul>
+                    <li>Legal document translation</li>
+                    <li>Certified translations</li>
+                    <li>Notarization support</li>
+                    <li>Fast turnaround options</li>
+                    <li>Multiple language support</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/15000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🚀 Startup Visa Support</h3>
+                <div class="price">From ¥180,000</div>
+                <div class="description">Launch your startup in Japan with our specialized support for entrepreneur visas and startup programs.</div>
+                <ul>
+                    <li>Business plan development (AI-assisted)</li>
+                    <li>Startup visa application</li>
+                    <li>Incubator program coordination</li>
+                    <li>Funding documentation</li>
+                    <li>Long-term visa strategy</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/180000" class="paypal-button">Pay with PayPal</a>
+            </div>
+
+            <div class="service-card">
+                <h3>🆘 Emergency Visa Consulting</h3>
+                <div class="price">From ¥50,000</div>
+                <div class="description">Urgent consultation and support for time-sensitive visa matters and immigration issues.</div>
+                <ul>
+                    <li>Same-day consultation available</li>
+                    <li>Visa status problem solving</li>
+                    <li>Deadline emergency support</li>
+                    <li>Immigration office representation</li>
+                    <li>Crisis management</li>
+                </ul>
+                <a href="https://paypal.me/mayuhajapan/50000" class="paypal-button">Pay with PayPal</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <h3>Mayuha Japan Gateway</h3>
+        <p>Licensed Administrative Scrivener: Isamu Mugiuda (麦田勇)</p>
+        <p>📍 Location: Osaka, Japan</p>
+        <p>📧 Email: <a href="mailto:contact@mayuhajapan.com">contact@mayuhajapan.com</a></p>
+        <p>🌐 Website: <a href="https://sites.google.com/view/mayuha-japan-gateway">mayuha-japan-gateway</a></p>
+        <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.8;">© 2025 Mayuha Japan Gateway. All Rights Reserved.</p>
+        <p style="font-size: 0.9em; opacity: 0.8;">Powered by AI Technology for Enhanced Service Quality</p>
+    </footer>
+</body>
+</html>
+
