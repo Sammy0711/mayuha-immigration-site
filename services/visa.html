@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Application Support - Mayuha Japan Gateway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: #764ba2;
+        }
+        
+        /* Visa Types Grid */
+        .visa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .visa-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #667eea;
+        }
+        
+        .visa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .visa-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .visa-card .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 1rem;
+        }
+        
+        .visa-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .visa-card ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .visa-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        /* Pricing Table */
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .pricing-card.featured {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 1rem 0;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Documents List */
+        .documents-list {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .documents-list ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .documents-list li {
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding-top: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 20px;
+            margin-top: 4rem;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        /* AI Badge */
+        .ai-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .process-step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="ai-badge">🚀 AI-Powered Service</span>
+        <h1>Visa Application Support</h1>
+        <p>Comprehensive immigration services for working, living, and succeeding in Japan</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Service Overview -->
+        <section class="section">
+            <h2 class="section-title">Our Visa Services</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">
+                With over 15 years of experience and 500+ successful cases, we provide expert guidance through Japan's immigration system. Our AI-enhanced approach ensures accuracy, speed, and transparency throughout the entire process.
+            </p>
+
+            <div class="visa-grid">
+                <div class="visa-card">
+                    <h3>🎯 Work Visa</h3>
+                    <div class="price">From ¥80,000</div>
+                    <ul>
+                        <li>Engineer / Specialist in Humanities</li>
+                        <li>Document preparation & review</li>
+                        <li>Immigration bureau liaison</li>
+                        <li>AI-generated supporting materials</li>
+                        <li>English/Japanese support</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>🌟 Highly Skilled Professional</h3>
+                    <div class="price">From ¥120,000</div>
+                    <ul>
+                        <li>Point calculation & optimization</li>
+                        <li>Fast-track processing</li>
+                        <li>Family visa coordination</li>
+                        <li>PR pathway guidance</li>
+                        <li>Premium benefits consultation</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>💼 Business Manager Visa</h3>
+                    <div class="price">From ¥200,000</div>
+                    <ul>
+                        <li>AI-enhanced business plan</li>
+                        <li>Company registration support</li>
+                        <li>Office requirements guidance</li>
+                        <li>Investment verification</li>
+                        <li>Complete application processing</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>👨‍👩‍👧 Family & Spouse Visa</h3>
+                    <div class="price">From ¥70,000</div>
+                    <ul>
+                        <li>Spouse visa applications</li>
+                        <li>Dependent visa processing</li>
+                        <li>Relationship documentation</li>
+                        <li>Financial proof assistance</li>
+                        <li>Interview preparation</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>🏠 Permanent Residence</h3>
+                    <div class="price">From ¥150,000</div>
+                    <ul>
+                        <li>Eligibility assessment</li>
+                        <li>Complete document preparation</li>
+                        <li>Tax & insurance verification</li>
+                        <li>Application submission</li>
+                        <li>Long-term follow-up support</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>🎓 Student Visa</h3>
+                    <div class="price">From ¥60,000</div>
+                    <ul>
+                        <li>COE application assistance</li>
+                        <li>School enrollment support</li>
+                        <li>Financial documentation</li>
+                        <li>Part-time work permission</li>
+                        <li>Visa extension guidance</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Plans -->
+        <section class="section">
+            <h2 class="section-title">Pricing Plans</h2>
+            
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">¥50,000~</div>
+                    <ul>
+                        <li>✓ Document review</li>
+                        <li>✓ Basic consultation</li>
+                        <li>✓ Application guidance</li>
+                        <li>✓ Email support</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Standard</h3>
+                    <div class="price">¥100,000~</div>
+                    <ul>
+                        <li>✓ Everything in Basic</li>
+                        <li>✓ Complete document preparation</li>
+                        <li>✓ Immigration bureau liaison</li>
+                        <li>✓ AI document generation</li>
+                        <li>✓ Priority support</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Most Popular</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">¥150,000~</div>
+                    <ul>
+                        <li>✓ Everything in Standard</li>
+                        <li>✓ Express processing</li>
+                        <li>✓ Dedicated case manager</li>
+                        <li>✓ 24/7 support</li>
+                        <li>✓ Success guarantee</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Premium Service</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Required Documents -->
+        <section class="section">
+            <h2 class="section-title">Required Documents</h2>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">
+                The specific documents required vary by visa type. Below are common requirements:
+            </p>
+            
+            <div class="documents-list">
+                <ul>
+                    <li>📄 Valid passport</li>
+                    <li>📋 Application forms (provided by us)</li>
+                    <li>📸 Passport-sized photos</li>
+                    <li>🎓 Educational certificates</li>
+                    <li>💼 Employment contract or offer letter</li>
+                    <li>🏢 Company registration documents</li>
+                    <li>💰 Financial statements</li>
+                    <li>🏠 Residence proof</li>
+                    <li>📊 Tax payment certificates</li>
+                    <li>📝 Curriculum Vitae (resume)</li>
+                    <li>🔍 Additional supporting documents</li>
+                    <li>🌐 Translations (if needed)</li>
+                </ul>
+            </div>
+            <p style="margin-top: 1.5rem; font-style: italic; color: #666;">
+                * Our AI system will help identify exactly which documents you need based on your specific situation.
+            </p>
+        </section>
+
+        <!-- Application Process -->
+        <section class="section">
+            <h2 class="section-title">Application Process</h2>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Initial Consultation</h3>
+                        <p>Free 15-minute consultation to understand your situation and determine the best visa strategy. We'll assess your eligibility and explain the process.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>AI-Powered Document Analysis</h3>
+                        <p>Our AI system reviews your documents within 48 hours, identifying any gaps or issues. This reduces traditional processing time by 60%.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Document Preparation</h3>
+                        <p>We prepare all required documents, application forms, and supporting materials with AI-enhanced accuracy and completeness.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Application Submission</h3>
+                        <p>We submit your application to the Immigration Bureau and handle all communication on your behalf.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Follow-up & Result</h3>
+                        <p>We track your application status and respond to any additional requests from immigration. You'll receive regular updates throughout the process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How long does the visa application process take?</div>
+                <div class="faq-answer">
+                    Processing times vary by visa type. Work visas typically take 1-3 months, while Permanent Residence can take 4-12 months. Our AI-enhanced approach helps expedite the process by ensuring accuracy from the start.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What is your success rate?</div>
+                <div class="faq-answer">
+                    We maintain a 95%+ success rate across all visa categories with over 500 successful cases. Our AI system helps identify and address potential issues before submission.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do I need to come to your office?</div>
+                <div class="faq-answer">
+                    No. We handle most cases entirely online through secure video consultations and document sharing. In-person meetings are available if preferred.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What languages do you support?</div>
+                <div class="faq-answer">
+                    We provide full support in English, Japanese, and Chinese. Our multilingual team and AI translation tools ensure clear communication throughout the process.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens if my application is rejected?</div>
+                <div class="faq-answer">
+                    While rare, if an application is rejected, we'll analyze the reasons and advise on the best next steps. Our Premium plan includes a success guarantee with free resubmission.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How does AI improve your service?</div>
+                <div class="faq-answer">
+                    Our AI tools review documents for completeness, generate supporting materials, identify potential issues, and ensure consistency. This reduces processing time by 60% while improving accuracy.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can you help with visa extensions or changes?</div>
+                <div class="faq-answer">
+                    Yes. We handle all types of visa changes and extensions, including changes in employment, residence, and status of residence adjustments.
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <div class="cta-section" id="contact">
+            <h2>Ready to Start Your Japan Journey?</h2>
+            <p>Book a free 15-minute consultation and let's discuss your visa strategy</p>
+            <a href="https://calendly.com/mayuha-japan" class="cta-button" style="background: white; color: #667eea;">Schedule Free Consultation</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+                Or email us at: <a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Mayuha Administrative Scrivener Office. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Licensed Administrative Scrivener | Osaka, Japan</p>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

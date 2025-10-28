@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Setup Services - Mayuha Japan Gateway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #f5576c;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 0.5rem;
+        }
+        
+        .company-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .company-card {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #f093fb;
+        }
+        
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.2);
+        }
+        
+        .company-card h3 {
+            color: #f5576c;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+        
+        .company-card .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #f093fb;
+            margin-bottom: 1rem;
+        }
+        
+        .company-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .company-card ul li {
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .company-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f5576c;
+            font-weight: bold;
+        }
+        
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: #f5576c;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.2);
+        }
+        
+        .pricing-card.featured {
+            border-color: #f093fb;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            color: #f5576c;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #f093fb;
+            margin: 1rem 0;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            color: #f5576c;
+            margin-bottom: 0.5rem;
+        }
+        
+        .documents-list {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .documents-list ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .documents-list li {
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #f5576c;
+        }
+        
+        .faq-item {
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            background: #ffe6eb;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #f5576c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding-top: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 20px;
+            margin-top: 4rem;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .ai-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .process-step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI-Enhanced Business Setup</span>
+        <h1>Company Setup Services</h1>
+        <p>From business planning to registration - your complete solution for establishing a company in Japan</p>
+    </section>
+
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">Company Formation Services</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">
+                Starting a business in Japan requires careful planning and compliance with local regulations. We provide end-to-end company setup services, leveraging AI to create comprehensive business plans and ensure regulatory compliance.
+            </p>
+
+            <div class="company-types">
+                <div class="company-card">
+                    <h3>🏢 Kabushiki Kaisha (KK)</h3>
+                    <div class="price">From ¥300,000</div>
+                    <ul>
+                        <li>Stock corporation (most common)</li>
+                        <li>Minimum capital: ¥1</li>
+                        <li>Articles of incorporation</li>
+                        <li>Legal Affairs Bureau registration</li>
+                        <li>Corporate seal creation</li>
+                        <li>Tax office registration</li>
+                    </ul>
+                </div>
+
+                <div class="company-card">
+                    <h3>🏛️ Godo Kaisha (GK)</h3>
+                    <div class="price">From ¥200,000</div>
+                    <ul>
+                        <li>Limited liability company</li>
+                        <li>Lower registration costs</li>
+                        <li>Flexible management structure</li>
+                        <li>Suitable for small businesses</li>
+                        <li>Simpler compliance requirements</li>
+                        <li>Popular among startups</li>
+                    </ul>
+                </div>
+
+                <div class="company-card">
+                    <h3>🏪 Branch Office</h3>
+                    <div class="price">From ¥150,000</div>
+                    <ul>
+                        <li>Extension of foreign parent company</li>
+                        <li>Requires resident representative</li>
+                        <li>Registration certificate translation</li>
+                        <li>Local compliance setup</li>
+                        <li>Tax registration assistance</li>
+                    </ul>
+                </div>
+
+                <div class="company-card">
+                    <h3>📊 General Incorporated Association</h3>
+                    <div class="price">From ¥180,000</div>
+                    <ul>
+                        <li>Non-profit organization structure</li>
+                        <li>No minimum capital required</li>
+                        <li>Suitable for NPOs and associations</li>
+                        <li>Tax benefits available</li>
+                        <li>Community-focused entities</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Service Packages</h2>
+            
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>Essentials</h3>
+                    <div class="price">¥150,000~</div>
+                    <ul>
+                        <li>✓ Company name search</li>
+                        <li>✓ Articles of incorporation</li>
+                        <li>✓ Registration application</li>
+                        <li>✓ Corporate seal order</li>
+                        <li>✓ Basic consultation</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Business Launch</h3>
+                    <div class="price">¥300,000~</div>
+                    <ul>
+                        <li>✓ Everything in Essentials</li>
+                        <li>✓ AI-generated business plan</li>
+                        <li>✓ Bank account opening support</li>
+                        <li>✓ Tax office registration</li>
+                        <li>✓ Business Manager Visa coordination</li>
+                        <li>✓ Office lease consultation</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Most Popular</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Premium Setup</h3>
+                    <div class="price">¥500,000~</div>
+                    <ul>
+                        <li>✓ Everything in Business Launch</li>
+                        <li>✓ Virtual office arrangement</li>
+                        <li>✓ Accounting setup & training</li>
+                        <li>✓ Employment regulations</li>
+                        <li>✓ HR compliance guidance</li>
+                        <li>✓ 6-month ongoing support</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Full Service</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Required Documents & Information</h2>
+            
+            <div class="documents-list">
+                <ul>
+                    <li>📋 Company name (3 options)</li>
+                    <li>🏢 Business address</li>
+                    <li>💰 Capital amount</li>
+                    <li>👥 Director information & addresses</li>
+                    <li>📞 Contact information</li>
+                    <li>🎯 Business purpose (detailed)</li>
+                    <li>📅 Fiscal year end date</li>
+                    <li>🆔 Personal identification documents</li>
+                    <li>📜 Seal registration certificates</li>
+                    <li>🏦 Bank account details (for capital payment)</li>
+                    <li>🏠 Residence certificates (for all directors)</li>
+                    <li>📝 Power of attorney (if applicable)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Company Formation Process</h2>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Initial Consultation & Planning</h3>
+                        <p>Discuss your business goals, choose the right company structure, and develop your business strategy. Our AI tools help create a comprehensive business plan tailored to your industry.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Document Preparation</h3>
+                        <p>We prepare all required documents including articles of incorporation, application forms, and supporting materials. AI ensures completeness and accuracy.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Notarization (for KK only)</h3>
+                        <p>Articles of incorporation for Kabushiki Kaisha must be notarized. We handle coordination with the notary public and ensure compliance.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Capital Payment & Verification</h3>
+                        <p>Transfer your capital to the designated account and obtain payment certificates. We guide you through this critical step.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Legal Affairs Bureau Registration</h3>
+                        <p>Submit your registration application to the Legal Affairs Bureau. This typically takes 1-2 weeks for approval.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Post-Registration Procedures</h3>
+                        <p>Complete tax office registration, obtain corporate seal certificate, open corporate bank account, and set up accounting systems.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h3>Ongoing Support</h3>
+                        <p>We provide continued support for compliance, visa applications for business managers, and business development consulting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How long does company registration take?</div>
+                <div class="faq-answer">
+                    The entire process typically takes 3-6 weeks from initial consultation to final registration. The Legal Affairs Bureau registration itself takes 1-2 weeks after document submission.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What's the difference between KK and GK?</div>
+                <div class="faq-answer">
+                    KK (Kabushiki Kaisha) is a stock corporation with higher prestige and more complex requirements. GK (Godo Kaisha) is an LLC with lower costs, simpler management, and is popular among startups and foreign companies entering Japan.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How much capital do I need?</div>
+                <div class="faq-answer">
+                    Legally, you can start with ¥1 of capital. However, for Business Manager Visa purposes, we recommend at least ¥5 million. We'll help determine the optimal amount based on your business plan and visa needs.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can a foreigner be a company director?</div>
+                <div class="faq-answer">
+                    Yes. However, at least one director must have a valid address in Japan. If you're applying for a Business Manager Visa, you'll need proper visa status before taking on the director role.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do I need a physical office?</div>
+                <div class="faq-answer">
+                    Yes, you need a registered business address in Japan. This can be your own office, a shared office, or a virtual office. We can help arrange suitable office solutions based on your needs.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What ongoing compliance is required?</div>
+                <div class="faq-answer">
+                    You'll need to file annual tax returns, maintain proper accounting records, update corporate registry for any changes, and comply with labor laws if hiring employees. We offer ongoing compliance support packages.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can you help with bank account opening?</div>
+                <div class="faq-answer">
+                    Yes. Opening a corporate bank account in Japan can be challenging for new companies. We provide introduction letters and support documentation to improve your chances of approval.
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>Ready to Launch Your Business in Japan?</h2>
+            <p>Let's discuss your company formation strategy in a free consultation</p>
+            <a href="https://calendly.com/mayuha-japan" class="cta-button" style="background: white; color: #f5576c;">Schedule Free Consultation</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+                Or email us at: <a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a>
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Mayuha Administrative Scrivener Office. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Licensed Administrative Scrivener | Osaka, Japan</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

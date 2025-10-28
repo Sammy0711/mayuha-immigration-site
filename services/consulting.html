@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Consulting - Mayuha Japan Gateway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #00f2fe;
+            border-bottom: 3px solid #00f2fe;
+            padding-bottom: 0.5rem;
+        }
+        
+        .consulting-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #4facfe;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.2);
+        }
+        
+        .service-card h3 {
+            color: #00f2fe;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+        }
+        
+        .service-card .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #4facfe;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .service-card ul li {
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .service-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00f2fe;
+            font-weight: bold;
+        }
+        
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: #00f2fe;
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+        }
+        
+        .pricing-card.featured {
+            border-color: #4facfe;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            color: #00f2fe;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-card .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4facfe;
+            margin: 1rem 0;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .expertise-item {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .expertise-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .expertise-item .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .expertise-item h4 {
+            color: #00f2fe;
+            margin-bottom: 0.5rem;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            color: #00f2fe;
+            margin-bottom: 0.5rem;
+        }
+        
+        .faq-item {
+            background: #f0f9ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-item:hover {
+            background: #e0f7ff;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #00f2fe;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding-top: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 20px;
+            margin-top: 4rem;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .ai-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .case-study {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 5px solid #4facfe;
+        }
+        
+        .case-study h4 {
+            color: #00f2fe;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .process-step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI-Powered Strategy</span>
+        <h1>Business Consulting</h1>
+        <p>Strategic guidance for growing your business in Japan with AI-enhanced market intelligence</p>
+    </section>
+
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">Our Consulting Services</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">
+                Whether you're entering the Japanese market or expanding your existing operations, we provide comprehensive business consulting services powered by AI analytics and 15+ years of local market expertise.
+            </p>
+
+            <div class="consulting-services">
+                <div class="service-card">
+                    <h3>🎯 Market Entry Strategy</h3>
+                    <div class="price">From ¥200,000</div>
+                    <ul>
+                        <li>Market research & analysis</li>
+                        <li>Competitive landscape assessment</li>
+                        <li>Entry strategy development</li>
+                        <li>Regulatory compliance planning</li>
+                        <li>Partnership identification</li>
+                        <li>AI-powered market intelligence</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>📊 Business Planning</h3>
+                    <div class="price">From ¥150,000</div>
+                    <ul>
+                        <li>Comprehensive business plan creation</li>
+                        <li>Financial projections & modeling</li>
+                        <li>Go-to-market strategy</li>
+                        <li>Investor presentation materials</li>
+                        <li>AI-generated market data</li>
+                        <li>Risk assessment & mitigation</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🤝 Partnership Development</h3>
+                    <div class="price">From ¥250,000</div>
+                    <ul>
+                        <li>Partner identification & vetting</li>
+                        <li>Partnership structure design</li>
+                        <li>Negotiation support</li>
+                        <li>Contract review & consultation</li>
+                        <li>Joint venture facilitation</li>
+                        <li>Ongoing relationship management</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>💼 HR & Compliance</h3>
+                    <div class="price">From ¥180,000</div>
+                    <ul>
+                        <li>Employment regulations drafting</li>
+                        <li>HR policy development</li>
+                        <li>Labor law compliance</li>
+                        <li>Foreign employee management</li>
+                        <li>Visa coordination for staff</li>
+                        <li>Payroll & social insurance setup</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🌐 International Expansion</h3>
+                    <div class="price">From ¥300,000</div>
+                    <ul>
+                        <li>Cross-border strategy development</li>
+                        <li>International trade compliance</li>
+                        <li>Export/import procedures</li>
+                        <li>Foreign subsidiary setup</li>
+                        <li>Global supply chain optimization</li>
+                        <li>Multi-market coordination</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🔧 Operations Optimization</h3>
+                    <div class="price">From ¥220,000</div>
+                    <ul>
+                        <li>Process improvement analysis</li>
+                        <li>Efficiency enhancement strategies</li>
+                        <li>Technology integration planning</li>
+                        <li>Quality management systems</li>
+                        <li>Cost reduction initiatives</li>
+                        <li>Performance metrics development</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Our Areas of Expertise</h2>
+            
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <div class="icon">🏭</div>
+                    <h4>Manufacturing</h4>
+                    <p>Production setup & supply chain</p>
+                </div>
+                <div class="expertise-item">
+                    <div class="icon">💻</div>
+                    <h4>Technology</h4>
+                    <p>IT services & software</p>
+                </div>
+                <div class="expertise-item">
+                    <div class="icon">🛍️</div>
+                    <h4>E-commerce</h4>
+                    <p>Online retail & platforms</p>
+                </div>
+                <div class="expertise-item">
+                    <div class="icon">🏨</div>
+                    <h4>Hospitality</h4>
+                    <p>Hotels & restaurants</p>
+                </div>
+                <div class="expertise-item">
+                    <div class="icon">🎓</div>
+                    <h4>Education</h4>
+                    <p>Language schools & training</p>
+                </div>
+                <div class="expertise-item">
+                    <div class="icon">🏥</div>
+                    <h4>Healthcare</h4>
+                    <p>Medical services & wellness</p>
+                </div>
+                <div class="expertise-item">
+                    <div class="icon">🎨</div>
+                    <h4>Creative</h4>
+                    <p>Design & media production</p>
+                </div>
+                <div class="expertise-item">
+                    <div class="icon">💰</div>
+                    <h4>Finance</h4>
+                    <p>Fintech & consulting</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Consulting Packages</h2>
+            
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>Quick Start</h3>
+                    <div class="price">¥100,000</div>
+                    <ul>
+                        <li>✓ 3 consulting sessions (2 hours each)</li>
+                        <li>✓ Initial market assessment</li>
+                        <li>✓ Strategic recommendations</li>
+                        <li>✓ Email support (1 month)</li>
+                        <li>✓ Basic action plan</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>Growth Partner</h3>
+                    <div class="price">¥300,000</div>
+                    <ul>
+                        <li>✓ 8 consulting sessions (2 hours each)</li>
+                        <li>✓ Comprehensive business plan</li>
+                        <li>✓ Market entry strategy</li>
+                        <li>✓ AI-powered analytics</li>
+                        <li>✓ Priority support (3 months)</li>
+                        <li>✓ Quarterly review meetings</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Most Popular</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Strategic Advisory</h3>
+                    <div class="price">¥800,000</div>
+                    <ul>
+                        <li>✓ Unlimited consulting (6 months)</li>
+                        <li>✓ Dedicated strategic advisor</li>
+                        <li>✓ Full market research</li>
+                        <li>✓ Partnership facilitation</li>
+                        <li>✓ 24/7 priority support</li>
+                        <li>✓ Board-level presentations</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Premium</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Our Consulting Process</h2>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Discovery & Assessment</h3>
+                        <p>We start with a comprehensive assessment of your business objectives, current situation, and challenges. Our AI tools analyze market data to provide initial insights.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Strategic Planning</h3>
+                        <p>Based on our assessment, we develop a customized strategic plan with clear objectives, milestones, and action items. AI-enhanced market intelligence informs every recommendation.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Implementation Support</h3>
+                        <p>We work alongside your team to implement the strategy, providing hands-on guidance, problem-solving, and course corrections as needed.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Monitoring & Optimization</h3>
+                        <p>Regular review sessions track progress against KPIs. We use data analytics to identify optimization opportunities and adjust strategies for maximum impact.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Ongoing Partnership</h3>
+                        <p>Beyond project completion, we remain available as your trusted advisor for new challenges, expansion opportunities, and strategic questions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Success Stories</h2>
+            
+            <div class="case-study">
+                <h4>🚀 Tech Startup: Series A Funding Success</h4>
+                <p><strong>Challenge:</strong> A Vietnamese AI startup needed to establish Japanese operations and secure Series A funding from Japanese VCs.</p>
+                <p><strong>Solution:</strong> We developed a comprehensive market entry strategy, prepared investor materials, and facilitated introductions to key investors.</p>
+                <p><strong>Result:</strong> Secured $5M Series A funding within 6 months, established KK with 10 employees, obtained Business Manager Visas for 3 founders.</p>
+            </div>
+
+            <div class="case-study">
+                <h4>🏭 Manufacturing: Supply Chain Optimization</h4>
+                <p><strong>Challenge:</strong> A Chinese manufacturing company faced regulatory compliance issues and inefficient operations in their Japan branch.</p>
+                <p><strong>Solution:</strong> Conducted full compliance audit, restructured operations, and implemented new quality management systems.</p>
+                <p><strong>Result:</strong> 40% cost reduction, achieved ISO certification, increased production efficiency by 60%.</p>
+            </div>
+
+            <div class="case-study">
+                <h4>🛍️ E-commerce: Market Expansion</h4>
+                <p><strong>Challenge:</strong> An international e-commerce platform wanted to enter the Japanese market but lacked local expertise.</p>
+                <p><strong>Solution:</strong> Developed localization strategy, identified logistics partners, and created compliance framework for cross-border operations.</p>
+                <p><strong>Result:</strong> Successfully launched in Japan market, achieved ¥500M GMV in first year, established partnerships with 3 major retailers.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">What industries do you specialize in?</div>
+                <div class="faq-answer">
+                    We have experience across technology, manufacturing, e-commerce, hospitality, education, healthcare, and professional services. Our AI tools and local expertise allow us to quickly understand new industries.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How does AI enhance your consulting?</div>
+                <div class="faq-answer">
+                    Our AI tools provide real-time market data, competitive intelligence, trend analysis, and scenario modeling. This allows us to deliver faster insights and more data-driven recommendations than traditional consulting approaches.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can you help with fundraising?</div>
+                <div class="faq-answer">
+                    Yes. We prepare investor materials, business plans, and financial models. We can also facilitate introductions to Japanese VCs, angel investors, and strategic partners through our network.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do you offer ongoing support?</div>
+                <div class="faq-answer">
+                    Absolutely. We offer monthly retainer packages for ongoing strategic advisory, including regular review meetings, priority email/call support, and assistance with emerging challenges.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What makes your consulting different?</div>
+                <div class="faq-answer">
+                    Our unique combination of traditional administrative scrivener expertise, AI technology integration, multilingual capabilities, and deep understanding of both Japanese business culture and international business practices.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can you help with government subsidies?</div>
+                <div class="faq-answer">
+                    Yes. Japan offers various subsidies for business development, innovation, and hiring. We can identify applicable programs, prepare applications, and manage the entire subsidy acquisition process.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How quickly can you start?</div>
+                <div class="faq-answer">
+                    We can typically schedule an initial consultation within 48 hours and begin substantive work within one week. For urgent projects, expedited timelines are available.
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>Ready to Accelerate Your Business in Japan?</h2>
+            <p>Schedule a free strategic consultation to discuss your business objectives</p>
+            <a href="https://calendly.com/mayuha-japan" class="cta-button" style="background: white; color: #00f2fe;">Schedule Free Consultation</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+                Or email us at: <a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a>
+            </p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Mayuha Administrative Scrivener Office. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Licensed Administrative Scrivener | Osaka, Japan</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
