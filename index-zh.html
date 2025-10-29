@@ -3,12 +3,566 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayuha Japan Gateway - 人工智慧驱动的移民和法律服务</title>
+    <title>Mayuha Japan Gateway - AI驱动的移民与法律服务</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-    /* ... (styles go here, same as original) ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+            --primary-blue: #003366;
+            --secondary-blue: #0066cc;
+            --accent-gold: #d4af37;
+            --accent-orange: #ff9933;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+
+        .nav-links a:hover {
+            color: var(--secondary-blue);
+        }
+
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+
+        .lang-btn {
+            padding: 5px 10px;
+            border: 1px solid var(--primary-blue);
+            background: var(--white);
+            color: var(--primary-blue);
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 14px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+
+        .lang-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .lang-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .lang-btn:disabled:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0,51,102,0.9), rgba(0,102,204,0.8)),
+                        url('https://images.unsplash.com/photo-1480796927426-f609979314bd?w=1600') center/cover;
+            color: var(--white);
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+
+        .cta-button:hover {
+            background: var(--accent-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary-blue);
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+
+        .service-card {
+            background: var(--light-gray);
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--secondary-blue);
+        }
+
+
+        .service-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+
+        /* Why Choose Us */
+        .why-choose {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, var(--light-gray), var(--white));
+        }
+
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+        }
+
+
+        .feature-item h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+
+        /* Profile Section */
+        .profile {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+
+        .profile-image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+
+        .profile-text h3 {
+            color: var(--primary-blue);
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+
+        .profile-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+
+        .credentials {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-blue);
+            transition: background 0.3s;
+        }
+
+
+        .faq-question:hover {
+            background: var(--light-gray);
+        }
+
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: var(--text-light);
+        }
+
+
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+
+
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+
+
+        .faq-icon.active {
+            transform: rotate(180deg);
+        }
+
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .form-group label {
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+
+        .submit-btn {
+            padding: 15px 40px;
+            background: var(--secondary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+
+        .submit-btn:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+
+        .contact-info {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+
+        .contact-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+
+        .contact-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+
+        .contact-icon {
+            color: var(--secondary-blue);
+            font-size: 24px;
+        }
+
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+
+        .social-icon:hover {
+            background: var(--accent-gold);
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+        }
+
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+
+        .footer-section a:hover {
+            color: var(--accent-gold);
+        }
+
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+
+            .hero p {
+                font-size: 16px;
+            }
+
+
+            .profile-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -23,18 +577,249 @@
             </ul>
             <div class="lang-switcher">
                 <a href="/index.html" class="lang-btn">EN</a>
-                <button class="lang-btn" disabled style="opacity: 0.5; cursor: not-allowed;">JP</button>
+                <button class="lang-btn" disabled>JP</button>
                 <a href="/index-zh.html" class="lang-btn">中文</a>
             </div>
         </nav>
     </header>
+
+
     <section class="hero" id="home">
         <div class="container">
-            <h1>AI驱动的法律和移民服务支持</h1>
-            <p>专业行政书士事务所，为您的业务和签证需求提供支持</p>
-            <a href="#contact" class="cta-button">今天就开始</a>
+            <h1>AI驱动的日本法律与移民支持</h1>
+            <p>专业行政书士事务所，为您的业务与签证需求提供高效支持</p>
+            <a href="#contact" class="cta-button">立即开始</a>
         </div>
     </section>
-    <!-- ... (rest of the content translated similarly) ... -->
+
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">我们的服务</h2>
+            <div class="services-grid">
+                <a href="/services/visa.html" style="text-decoration: none; color: inherit;">
+                    <div class="service-card">
+                        <div class="service-icon">📋</div>
+                        <h3>签证申请</h3>
+                        <p>工作签证、经营管理签证、家属签证、永住与归化等全方位支持。专业引导您顺利通过日本复杂的在留资格手续。</p>
+                    </div>
+                </a>
+                <a href="/services/company.html" style="text-decoration: none; color: inherit;">
+                    <div class="service-card">
+                        <div class="service-icon">🏢</div>
+                        <h3>公司设立</h3>
+                        <p>从公司登记到各类许可申请的一站式代办服务。以高效流程帮助您在日本快速启动业务。</p>
+                    </div>
+                </a>
+                <a href="/services/consulting.html" style="text-decoration: none; color: inherit;">
+                    <div class="service-card">
+                        <div class="service-icon">💼</div>
+                        <h3>商业咨询</h3>
+                        <p>面向在日国际化业务的战略咨询。并购顾问、公司治理与合规支持，根据您的需求量身定制。</p>
+                    </div>
+                </a>
+                <a href="/services/legal.html" style="text-decoration: none; color: inherit;">
+                    <div class="service-card">
+                        <div class="service-icon">⚖️</div>
+                        <h3>法律文件</h3>
+                        <p>合同、协议及各类行政文件的专业起草与审阅，细致严谨，确保合规与准确。</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="why-choose" id="why-choose">
+        <div class="container">
+            <h2 class="section-title">为什么选择我们</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI驱动的高效</h3>
+                    <p>采用先进AI技术，将传统流程由3-5天加速至48小时内初稿完成</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌏</div>
+                    <h3>多语言支持</h3>
+                    <p>提供英文、中文与日文服务，面向多元化的国际客户</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>15年以上经验</h3>
+                    <p>累计办理500+签证案件，拥有丰富的移民与商业法实务经验</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🗾</div>
+                    <h3>覆盖全日本</h3>
+                    <p>提供全国范围在线咨询与远程支持，服务不受地域限制</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="profile" id="about">
+        <div class="container">
+            <h2 class="section-title">关于负责人</h2>
+            <div class="profile-content">
+                <img src="/images/profile.jpg" alt="Representative" class="profile-image">
+                <div class="profile-text">
+                    <h3>Isamu Mugiuda</h3>
+                    <p><strong>行政书士（Gyoseishoshi）・认证经营管理顾问</strong></p>
+                    <p>在移民法务与国际商业咨询领域深耕15年以上，已协助500+客户在日本实现目标。我们将传统法律专业与前沿AI技术结合，提供高效且可靠的服务体验。</p>
+                    <div class="credentials">
+                        <p><strong>教育背景：</strong> 三重大学｜横滨市立大学研究生院</p>
+                        <p><strong>专长领域：</strong> 移民法｜商业咨询｜国际事务</p>
+                        <p><strong>资格登记：</strong> 行政书士（Gyoseishoshi）</p>
+                        <p><strong>所在地：</strong> 日本大阪</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>签证申请通常需要多长时间？</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    根据签证类型与个人情况而异。借助我们的AI文档审查系统，可在48小时内完成材料初审与准备。入管局的处理一般为2-4周，复杂案件可能更久。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>与其他行政书士事务所相比，你们的优势是什么？</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    我们是日本首批融合AI技术的行政书士事务所之一，结合15年以上传统法务经验与先进AI工具，提供更快更准的服务。同时具备多语言支持与全国覆盖能力。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>不在日本，也能办理公司设立吗？</span>
+                    <span class="faq-icon">▼</span>
+                </div>
+                <div class="faq-answer">
+                    可以。我们提供远程协助与线上咨询，可代为协调全部必要的法律手续。我们的多语言团队将确保沟通顺畅。
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-content">
+                <form class="contact-form" netlify netlify-honeypot="bot-field" name="contact">
+                    <input type="hidden" name="form-name" value="contact">
+                    <div style="display:none;">
+                        <label>请勿填写（机器人字段）：<input name="bot-field"></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">电子邮箱</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">发送消息</button>
+                </form>
+                <div class="contact-info">
+                    <h3>联系方式</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>办公室所在地</strong><br>
+                            日本大阪
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>邮箱</strong><br>
+                            fanvankai@gmail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🌐</span>
+                        <div>
+                            <strong>网站</strong><br>
+                            https://mayuha.net/
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">W</a>
+                        <a href="#" class="social-icon">X</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Mayuha Japan Gateway</h4>
+                    <p>专注移民法务与国际商业支持的行政书士事务所。</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <a href="#home">主页</a>
+                    <a href="#services">服务</a>
+                    <a href="#about">关于我们</a>
+                    <a href="#contact">联系我们</a>
+                </div>
+                <div class="footer-section">
+                    <h4>服务</h4>
+                    <a href="#services">签证申请</a>
+                    <a href="#services">公司设立</a>
+                    <a href="#services">商业咨询</a>
+                    <a href="#services">法律文件</a>
+                </div>
+                <div class="footer-section">
+                    <h4>联系</h4>
+                    <p>日本大阪</p>
+                    <p>fanvankai@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Mayuha Japan Gateway ｜ 行政书士事务所 ｜ 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.faq-icon');
+            
+            answer.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+
+
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我们会尽快与您联系。');
+            this.reset();
+        });
+    </script>
 </body>
 </html>
