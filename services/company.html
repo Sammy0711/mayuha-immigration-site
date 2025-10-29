@@ -61,6 +61,25 @@
             opacity: 0.8;
         }
         
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            padding: 5px 10px;
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        
+        .lang-btn:hover { opacity: 0.8; }
+        .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
         .hero {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -402,6 +421,11 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="lang-switcher">
+                <a href="/index.html" class="lang-btn">EN</a>
+                <button class="lang-btn" disabled>JP</button>
+                <a href="/index-zh.html" class="lang-btn">中文</a>
+            </div>
         </nav>
     </header>
 
