@@ -1,35 +1,279 @@
-<!DOCTYPE html> 
-<html lang="zh"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>法律文件 - Mayuha Japan Gateway</title> 
-    <style> 
-    /* ... (styles go here, same as original) ... */ 
-    </style> 
-</head> 
-<body> 
-    <header class="header"> 
-        <nav class="nav-container"> 
-            <a href="/index-zh.html" class="logo">🌸 Mayuha Japan Gateway</a> 
-            <ul class="nav-links"> 
-                <li><a href="/index-zh.html">主页</a></li> 
-                <li><a href="#services">服务</a></li> 
-                <li><a href="#about">关于我们</a></li> 
-                <li><a href="#contact">联系我们</a></li> 
-            </ul> 
-            <div class="lang-switcher"> 
-                <a href="/index.html" class="lang-btn">EN</a> 
-                <button class="lang-btn" disabled>JP</button> 
-                <a href="/index-zh.html" class="lang-btn">中文</a> 
-            </div> 
-        </nav> 
-    </header> 
-    <section class="hero"> 
-        <span class="ai-badge">🚀 AI验证文件</span> 
-        <h1>法律文件</h1> 
-        <p>为您的所有法律需求提供专业的文档准备、翻译和认证服务</p> 
-    </section> 
-    <!-- ... (rest of the content translated similarly) ... --> 
-</body> 
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法律文件服务 - Mayuha Japan Gateway</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+        .header { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+        .lang-switcher { display: flex; gap: 10px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid white; background: transparent; color: white; text-decoration: none; border-radius: 3px; font-size: 0.9rem; display: inline-block; }
+        .lang-btn:hover { opacity: 0.8; } .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hero { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 8rem 2rem 4rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #fa709a; border-bottom: 3px solid #fa709a; padding-bottom: 0.5rem; }
+        .document-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .doc-card { background: linear-gradient(135deg, #fff9f0 0%, #ffe6d5 100%); border-radius: 15px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid #fa709a; }
+        .doc-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(250, 112, 154, 0.2); }
+        .doc-card h3 { color: #fa709a; margin-bottom: 1rem; font-size: 1.6rem; }
+        .doc-card .price { font-size: 1.4rem; font-weight: bold; color: #fee140; margin-bottom: 1rem; }
+        .doc-card ul { list-style: none; padding: 0; }
+        .doc-card ul li { padding: 0.6rem 0; padding-left: 1.5rem; position: relative; }
+        .doc-card ul li:before { content: "✓"; position: absolute; left: 0; color: #fa709a; font-weight: bold; }
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #fa709a; box-shadow: 0 10px 30px rgba(250, 112, 154, 0.2); }
+        .pricing-card.featured { border-color: #fee140; transform: scale(1.05); }
+        .pricing-card h3 { color: #fa709a; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #fee140; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .document-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .doc-type { background: linear-gradient(135deg, #fff9f0 0%, #ffe6d5 100%); border-radius: 10px; padding: 1.5rem; text-align: center; transition: transform 0.3s; border: 1px solid #fa709a; }
+        .doc-type:hover { transform: translateY(-5px); }
+        .doc-type .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .doc-type h4 { color: #fa709a; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #fa709a; margin-bottom: 0.5rem; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(250, 112, 154, 0.4); }
+        .cta-section { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .ai-badge { display: inline-block; background: #4facfe; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+        .quality-badges { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+        .badge { background: white; padding: 1rem 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
+        .badge .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .badge h4 { color: #fa709a; font-size: 1rem; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index-zh.html" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/index-zh.html">主页</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <a href="/index.html" class="lang-btn">EN</a>
+                <button class="lang-btn" disabled>JP</button>
+                <a href="/index-zh.html" class="lang-btn">中文</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI验证文件</span>
+        <h1>法律文件服务</h1>
+        <p>提供专业的法律文书起草、翻译与认证服务，确保准确与合规</p>
+    </section>
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">我们的文书服务</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">由持证行政书士提供文书制作、认证与翻译，结合AI校验提高准确性与完整性。</p>
+            <div class="document-services">
+                <div class="doc-card">
+                    <h3>📜 合同起草</h3>
+                    <div class="price">起价 ¥50,000</div>
+                    <ul>
+                        <li>劳动合同</li>
+                        <li>服务协议</li>
+                        <li>保密协议（NDA）</li>
+                        <li>合伙/合作协议</li>
+                        <li>许可与授权协议</li>
+                        <li>AI条款校验</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>🌐 翻译与认证</h3>
+                    <div class="price">起价 ¥15,000</div>
+                    <ul>
+                        <li>法律文书翻译</li>
+                        <li>认证翻译</li>
+                        <li>海牙认证（Apostille）</li>
+                        <li>公证支持</li>
+                        <li>中/英/日语种</li>
+                        <li>加急服务可选</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>🏢 公司文件</h3>
+                    <div class="price">起价 ¥30,000</div>
+                    <ul>
+                        <li>公司章程</li>
+                        <li>董事会决议</li>
+                        <li>股东协议</li>
+                        <li>公司内规与章程</li>
+                        <li>变更登记申请</li>
+                        <li>合规文档</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>👥 人事文书</h3>
+                    <div class="price">起价 ¥40,000</div>
+                    <ul>
+                        <li>就业规章</li>
+                        <li>劳动合同</li>
+                        <li>竞业限制协议</li>
+                        <li>解除与终止文件</li>
+                        <li>劳动法合规</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>🏠 不动产文件</h3>
+                    <div class="price">起价 ¥35,000</div>
+                    <ul>
+                        <li>租赁合同</li>
+                        <li>不动产买卖合同</li>
+                        <li>登记申请</li>
+                        <li>产权转移文件</li>
+                        <li>物业管理合同</li>
+                        <li>抵押文书</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>⚖️ 法定申请与提交</h3>
+                    <div class="price">起价 ¥45,000</div>
+                    <ul>
+                        <li>政府机关提交</li>
+                        <li>行政不服申诉</li>
+                        <li>许可申请</li>
+                        <li>执照更新</li>
+                        <li>监管报送</li>
+                        <li>合规报告</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">我们办理的文件类型</h2>
+            <div class="document-types">
+                <div class="doc-type"><div class="icon">📋</div><h4>合同</h4><p>各类商业合同</p></div>
+                <div class="doc-type"><div class="icon">💼</div><h4>雇佣</h4><p>人事与劳动文件</p></div>
+                <div class="doc-type"><div class="icon">🏢</div><h4>公司</h4><p>公司登记与变更</p></div>
+                <div class="doc-type"><div class="icon">🏠</div><h4>不动产</h4><p>物业与交易文书</p></div>
+                <div class="doc-type"><div class="icon">🛂</div><h4>出入境</h4><p>签证与在留文件</p></div>
+                <div class="doc-type"><div class="icon">🌐</div><h4>翻译</h4><p>认证翻译文件</p></div>
+                <div class="doc-type"><div class="icon">📜</div><h4>公证</h4><p>官方认证支持</p></div>
+                <div class="doc-type"><div class="icon">⚖️</div><h4>法定提交</h4><p>政府机关报送</p></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">服务套餐</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>单项文书</h3>
+                    <div class="price">¥15,000~</div>
+                    <ul>
+                        <li>✓ 单份文件制作</li>
+                        <li>✓ 基础审查与校验</li>
+                        <li>✓ 标准时效（5-7天）</li>
+                        <li>✓ 一次修订</li>
+                        <li>✓ 邮件交付</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">立即办理</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>文书套装</h3>
+                    <div class="price">¥80,000~</div>
+                    <ul>
+                        <li>✓ 最多5份相关文件</li>
+                        <li>✓ 全面AI校验</li>
+                        <li>✓ 优先时效（3-5天）</li>
+                        <li>✓ 不限次数修订</li>
+                        <li>✓ 含咨询服务</li>
+                        <li>✓ 公证协调</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">人气之选</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>持续支持</h3>
+                    <div class="price">¥200,000~/月</div>
+                    <ul>
+                        <li>✓ 不限数量文件</li>
+                        <li>✓ 专属文书经理</li>
+                        <li>✓ 加急（24-48小时）</li>
+                        <li>✓ 模板库使用权</li>
+                        <li>✓ 法规合规监测</li>
+                        <li>✓ 7x24优先支持</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">企业方案</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">质量保障</h2>
+            <div class="quality-badges">
+                <div class="badge"><div class="icon">🤖</div><h4>AI校验</h4><p>文件完整性智能检查</p></div>
+                <div class="badge"><div class="icon">👨‍⚖️</div><h4>专业资质</h4><p>持证行政书士</p></div>
+                <div class="badge"><div class="icon">✅</div><h4>高准确性</h4><p>确保无错误交付</p></div>
+                <div class="badge"><div class="icon">🔒</div><h4>高保密性</h4><p>严格隐私保护</p></div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section-title">文书制作流程</h2>
+            <div class="process-steps">
+                <div class="process-step"><div class="step-number">1</div><div class="step-content"><h3>需求沟通</h3><p>确认文件用途、要求与格式，评估现有材料。</p></div></div>
+                <div class="process-step"><div class="step-number">2</div><div class="step-content"><h3>信息收集</h3><p>通过结构化问卷收集必要信息与证明材料。</p></div></div>
+                <div class="process-step"><div class="step-number">3</div><div class="step-content"><h3>起草与AI校验</h3><p>结合AI起草并校验完整性、准确性与合规性。</p></div></div>
+                <div class="process-step"><div class="step-number">4</div><div class="step-content"><h3>专业审核</h3><p>由持证行政书士进行人工复核，确保质量。</p></div></div>
+                <div class="process-step"><div class="step-number">5</div><div class="step-content"><h3>客户确认与修订</h3><p>您审阅草稿并提出修改意见，我们快速迭代。</p></div></div>
+                <div class="process-step"><div class="step-number">6</div><div class="step-content"><h3>定稿与交付</h3><p>按需提供PDF/Word等格式文件及相关认证。</p></div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">常见问题</h2>
+            <div class="pricing-table" style="grid-template-columns: 1fr; gap: 1rem;">
+                <div class="pricing-card" style="text-align: left;"><h3>支持哪些语言翻译？</h3><p>提供中、日、英三语专业翻译。AI辅助初译，人工审校确保准确与地道。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>翻译是否具有法律效力？</h3><p>是。作为持证行政书士，我们的认证翻译被日本政府机关、法院与入管局接受。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>制作周期多久？</h3><p>标准5-7个工作日；优先3-5天；加急24-48小时。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>能否审查他人制作的文件？</h3><p>可以。我们提供审查与核验服务，重点检查合规性、完整性与潜在问题。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>是否提供模板？</h3><p>提供。持续支持方案含常用模板库，如劳动合同、NDA、服务协议等。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>如何安排公证？</h3><p>我们协调与认证公证员的预约与流程，全程指导。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>如何确保信息保密？</h3><p>严格遵守职业保密要求，传输加密、访问控制，可签署NDA。</p></div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>需要专业的法律文件服务？</h2>
+            <p>预约一次免费的咨询，讨论您的文书需求</p>
+            <a href="https://calendly.com/mayuha-japan" class="cta-button" style="background: white; color: #fa709a;">预约免费咨询</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">或发送邮件至：<a href="mailto:fanvankai@gmail.com" style="color: white; text-decoration: underline;">fanvankai@gmail.com</a></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Mayuha 行政书士事务所 版权所有</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">持证行政书士｜日本大阪</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item')?.forEach(item => { item.addEventListener('click', () => { item.classList.toggle('active'); }); });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = this.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
+    </script>
+</body>
 </html>

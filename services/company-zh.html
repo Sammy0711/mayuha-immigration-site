@@ -1,35 +1,407 @@
-<!DOCTYPE html> 
-<html lang="zh"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>公司设立服务 - Mayuha Japan Gateway</title> 
-    <style> 
-    /* ... (styles go here, same as original) ... */ 
-    </style> 
-</head> 
-<body> 
-    <header class="header"> 
-        <nav class="nav-container"> 
-            <a href="/index-zh.html" class="logo">🌸 Mayuha Japan Gateway</a> 
-            <ul class="nav-links"> 
-                <li><a href="/index-zh.html">主页</a></li> 
-                <li><a href="#services">服务</a></li> 
-                <li><a href="#about">关于我们</a></li> 
-                <li><a href="#contact">联系我们</a></li> 
-            </ul> 
-            <div class="lang-switcher"> 
-                <a href="/index.html" class="lang-btn">EN</a> 
-                <button class="lang-btn" disabled>JP</button> 
-                <a href="/index-zh.html" class="lang-btn">中文</a> 
-            </div> 
-        </nav> 
-    </header> 
-    <section class="hero"> 
-        <span class="ai-badge">🚀 AI增强业务设立</span> 
-        <h1>公司设立服务</h1> 
-        <p>从业务规划到注册 - 您在日本设立公司的完整解决方案</p> 
-    </section> 
-    <!-- ... (rest of the content translated similarly) ... --> 
-</body> 
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公司设立服务 - Mayuha Japan Gateway</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover { opacity: 0.8; }
+        
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .lang-btn {
+            padding: 5px 10px;
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+        
+        .lang-btn:hover { opacity: 0.8; }
+        .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .hero {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #f5576c; border-bottom: 3px solid #f5576c; padding-bottom: 0.5rem; }
+        
+        .company-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .company-card { background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%); border-radius: 15px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid #f093fb; }
+        .company-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(245, 87, 108, 0.2); }
+        .company-card h3 { color: #f5576c; margin-bottom: 1rem; font-size: 1.6rem; }
+        .company-card .price { font-size: 1.4rem; font-weight: bold; color: #f093fb; margin-bottom: 1rem; }
+        .company-card ul { list-style: none; padding: 0; }
+        .company-card ul li { padding: 0.6rem 0; padding-left: 1.5rem; position: relative; }
+        .company-card ul li:before { content: "✓"; position: absolute; left: 0; color: #f5576c; font-weight: bold; }
+        
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #f5576c; box-shadow: 0 10px 30px rgba(245, 87, 108, 0.2); }
+        .pricing-card.featured { border-color: #f093fb; transform: scale(1.05); }
+        .pricing-card h3 { color: #f5576c; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #f093fb; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #f5576c; margin-bottom: 0.5rem; }
+        
+        .documents-list { background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%); border-radius: 10px; padding: 2rem; margin-top: 2rem; }
+        .documents-list ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .documents-list li { padding: 1rem; background: white; border-radius: 5px; border-left: 3px solid #f5576c; }
+        
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4); }
+        .cta-section { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .ai-badge { display: inline-block; background: #ffd700; color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+        
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+            .nav-links { display: none; }
+            .process-step { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index-zh.html" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/index-zh.html">主页</a></li>
+                <li><a href="#services">服务</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <a href="/index.html" class="lang-btn">EN</a>
+                <button class="lang-btn" disabled>JP</button>
+                <a href="/index-zh.html" class="lang-btn">中文</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI增强业务设立</span>
+        <h1>公司设立服务</h1>
+        <p>从业务规划到登记注册——为您在日本设立公司提供一站式解决方案</p>
+    </section>
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">公司形态与方案</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">在日本创业需要充分规划并遵循本地法规。我们提供端到端公司设立支持，结合AI生成高质量商业计划，确保合规与高效。</p>
+
+            <div class="company-types">
+                <div class="company-card">
+                    <h3>🏢 株式会社（KK）</h3>
+                    <div class="price">起价 ¥300,000</div>
+                    <ul>
+                        <li>日本最常见的股份公司形态</li>
+                        <li>最低资本：¥1</li>
+                        <li>制定公司章程</li>
+                        <li>法务局登记</li>
+                        <li>公司印章制作</li>
+                        <li>税务机关登记</li>
+                    </ul>
+                </div>
+
+                <div class="company-card">
+                    <h3>🏛️ 合同会社（GK）</h3>
+                    <div class="price">起价 ¥200,000</div>
+                    <ul>
+                        <li>有限责任公司形态</li>
+                        <li>登记成本较低</li>
+                        <li>灵活的经营结构</li>
+                        <li>适合中小企业</li>
+                        <li>合规要求较简</li>
+                        <li>创业公司偏好</li>
+                    </ul>
+                </div>
+
+                <div class="company-card">
+                    <h3>🏪 分公司（Branch Office）</h3>
+                    <div class="price">起价 ¥150,000</div>
+                    <ul>
+                        <li>海外母公司的延伸</li>
+                        <li>需常驻代表</li>
+                        <li>登记证书翻译</li>
+                        <li>本地合规设置</li>
+                        <li>税务登记支持</li>
+                    </ul>
+                </div>
+
+                <div class="company-card">
+                    <h3>📊 一般社团法人</h3>
+                    <div class="price">起价 ¥180,000</div>
+                    <ul>
+                        <li>非营利组织形态</li>
+                        <li>无需最低资本</li>
+                        <li>适合NPO与协会</li>
+                        <li>可享受部分税务优惠</li>
+                        <li>社区与公益导向</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">服务套餐</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>基础套餐</h3>
+                    <div class="price">¥150,000~</div>
+                    <ul>
+                        <li>✓ 公司名称查询</li>
+                        <li>✓ 章程（定款）制作</li>
+                        <li>✓ 登记申请书类</li>
+                        <li>✓ 公司印章订制</li>
+                        <li>✓ 基础咨询</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">立即开始</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <h3>启动套餐</h3>
+                    <div class="price">¥300,000~</div>
+                    <ul>
+                        <li>✓ 含基础套餐全部内容</li>
+                        <li>✓ AI生成商业计划书</li>
+                        <li>✓ 银行开户支持</li>
+                        <li>✓ 税务机关登记</li>
+                        <li>✓ 经营管理签证协调</li>
+                        <li>✓ 办公室租赁咨询</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">人气之选</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>高端设立</h3>
+                    <div class="price">¥500,000~</div>
+                    <ul>
+                        <li>✓ 含启动套餐全部内容</li>
+                        <li>✓ 虚拟办公室安排</li>
+                        <li>✓ 会计系统搭建与培训</li>
+                        <li>✓ 就业规章制定</li>
+                        <li>✓ 劳务合规指导</li>
+                        <li>✓ 6个月持续支持</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">全方位服务</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">所需资料与信息</h2>
+            <div class="documents-list">
+                <ul>
+                    <li>📋 公司名称（3个候选）</li>
+                    <li>🏢 经营地址</li>
+                    <li>💰 注册资本金额</li>
+                    <li>👥 董事信息与住址</li>
+                    <li>📞 联系方式</li>
+                    <li>🎯 经营目的（详细）</li>
+                    <li>📅 会计年度截止日</li>
+                    <li>🆔 个人身份证明文件</li>
+                    <li>📜 印章登记证明</li>
+                    <li>🏦 银行账户信息（资本缴纳）</li>
+                    <li>🏠 全体董事的住民票</li>
+                    <li>📝 委托书（如适用）</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section-title">公司设立流程</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>初次咨询与规划</h3>
+                        <p>明确商业目标，选择合适的公司形态并制定战略。AI工具协助生成完整商业计划。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>文件准备</h3>
+                        <p>准备章程、申请表等全部文件，确保完整与准确，并进行AI校验。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>公证（仅限KK）</h3>
+                        <p>株式会社的章程需进行公证，我们协调整个公证流程。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>资本缴纳与证明</h3>
+                        <p>完成资本汇入并取得缴款证明，我们提供全程指导。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>法务局登记</h3>
+                        <p>向法务局提交登记申请，通常审批需1-2周。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>登记后手续</h3>
+                        <p>完成税务登记、印章证取得、开设公司账户并搭建会计系统。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h3>持续支持</h3>
+                        <p>提供合规维持、经营管理签证、业务发展等后续支持。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">常见问题</h2>
+            <div class="pricing-table" style="grid-template-columns: 1fr; gap: 1rem;">
+                <div class="pricing-card" style="text-align: left;">
+                    <h3>公司登记需要多长时间？</h3>
+                    <p>从初次咨询到完成登记通常需3-6周。法务局登记审核一般在提交后1-2周完成。</p>
+                </div>
+                <div class="pricing-card" style="text-align: left;">
+                    <h3>KK与GK有什么区别？</h3>
+                    <p>KK（株式会社）社会信誉更高但手续更复杂；GK（合同会社）成本更低、管理灵活，深受创业公司与外资青睐。</p>
+                </div>
+                <div class="pricing-card" style="text-align: left;">
+                    <h3>需要多少资本？</h3>
+                    <p>法律上最低¥1即可。但若配合经营管理签证，建议至少¥500万。我们将根据计划与签证需求提供建议。</p>
+                </div>
+                <div class="pricing-card" style="text-align: left;">
+                    <h3>外国人可以担任董事吗？</h3>
+                    <p>可以。但至少需要一名在日本有住址的董事。申请经营管理签证的情况下，需具备相应在留资格。</p>
+                </div>
+                <div class="pricing-card" style="text-align: left;">
+                    <h3>必须有实体办公室吗？</h3>
+                    <p>需要在日本登记营业地址，可为自有办公室、共享或虚拟办公室。我们可协助提供合适方案。</p>
+                </div>
+                <div class="pricing-card" style="text-align: left;">
+                    <h3>能协助开公司账户吗？</h3>
+                    <p>可以。我们提供介绍信与支持文件，提升开户通过率。</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>准备好在日本启动您的事业了吗？</h2>
+            <p>预约一次免费的咨询，一起制定设立与发展策略</p>
+            <a href="https://calendly.com/mayuha-japan" class="cta-button" style="background: white; color: #f5576c;">预约免费咨询</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">或发送邮件至：<a href="mailto:fanvankai@gmail.com" style="color: white; text-decoration: underline;">fanvankai@gmail.com</a></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Mayuha 行政书士事务所 版权所有</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">持证行政书士｜日本大阪</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.pricing-card').forEach(item => {
+            // Placeholder for potential interactions
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
 </html>
