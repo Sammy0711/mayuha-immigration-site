@@ -72,7 +72,12 @@
         .submit-btn { padding: 15px 40px; background: var(--secondary-blue); color: var(--white); border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.3s; }
         .submit-btn:hover { background: var(--primary-blue); transform: translateY(-2px); }
         .contact-info { background: var(--light-gray); padding: 40px; border-radius: 10px; }
+        .contact-info h3 { color: var(--primary-blue); margin-bottom: 20px; }
+        .contact-item { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
         .contact-icon { color: var(--secondary-blue); font-size: 24px; }
+        .social-links { display: flex; gap: 15px; margin-top: 30px; }
+        .social-icon { width: 40px; height: 40px; background: var(--secondary-blue); color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; }
+        .social-icon:hover { background: var(--accent-gold); color: var(--primary-blue); transform: translateY(-3px); }
         footer { background: var(--primary-blue); color: var(--white); padding: 40px 0 20px; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px; }
         .footer-section h4 { margin-bottom: 15px; color: var(--accent-gold); }
@@ -116,17 +121,17 @@
             </ul>
             <div class="lang-switcher">
                 <a href="/index.html" class="lang-btn">EN</a>
+                <button class="lang-btn" disabled style="opacity: 0.5; cursor: not-allowed;">JP</button>
                 <a href="/index-zh.html" class="lang-btn">中文</a>
-                <a href="/index-ja.html" class="lang-btn">日本語</a>
             </div>
         </nav>
     </header>
 
     <section class="hero" id="home">
         <div class="container">
-            <h1>AI活用の法務・入管サポート</h1>
-            <p>ビザ・会社設立・法的文書支援まで、専門の行政書士が伴走します</p>
-            <a href="#contact" class="cta-button">今すぐ相談する</a>
+            <h1>日本におけるAI活用の入管・法務サポート</h1>
+            <p>ビザ申請と会社設立をサポートする行政書士事務所</p>
+            <a href="#contact" class="cta-button">無料相談を始める</a>
         </div>
     </section>
 
@@ -198,7 +203,7 @@
         <div class="container">
             <h2 class="section-title">代表者プロフィール</h2>
             <div class="profile-content">
-                <img src="/images/Profile.jpg" alt="Representative" class="profile-image">
+                <img src="/images/profile.jpg" alt="Representative" class="profile-image">
                 <div class="profile-text">
                     <h3>Isamu Mugiuda</h3>
                     <p><strong>行政書士／認定経営コンサルタント</strong></p>
@@ -272,20 +277,29 @@
                     <h3>連絡先</h3>
                     <div class="contact-item">
                         <span class="contact-icon">📍</span>
-                        <div><strong>所在地</strong><br>大阪府</div>
+                        <div>
+                            <strong>事務所所在地</strong><br>
+                            大阪府（西天満・堂島エリア）
+                        </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-icon">📧</span>
-                        <div><strong>メール</strong><br>fanvankai@gmail.com</div>
+                        <div>
+                            <strong>メール</strong><br>
+                            info@mayuha.net
+                        </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-icon">🌐</span>
-                        <div><strong>Web</strong><br>https://mayuha.net/</div>
+                        <div>
+                            <strong>Webサイト</strong><br>
+                            https://mayuha.net/
+                        </div>
                     </div>
-                    <div class="social-links" style="display:flex; gap:15px; margin-top:30px;">
-                        <a href="#" class="social-icon" style="width:40px;height:40px;background:var(--secondary-blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;">in</a>
-                        <a href="#" class="social-icon" style="width:40px;height:40px;background:var(--secondary-blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;">W</a>
-                        <a href="#" class="social-icon" style="width:40px;height:40px;background:var(--secondary-blue);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;">X</a>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">W</a>
+                        <a href="#" class="social-icon">X</a>
                     </div>
                 </div>
             </div>
@@ -354,8 +368,8 @@
                 </div>
                 <div class="footer-section">
                     <h4>連絡先</h4>
-                    <p>大阪府</p>
-                    <p>fanvankai@gmail.com</p>
+                    <p>大阪府（西天満・堂島エリア）</p>
+                    <p>info@mayuha.net</p>
                 </div>
             </div>
             <div class="footer-bottom">
