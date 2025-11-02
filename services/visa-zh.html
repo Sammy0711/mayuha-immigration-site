@@ -5,8 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>签证申请支持 - Mayuha Japan Gateway</title>
     <style>
-    /* ... (styles go here, same as original) ... */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+
+        .lang-switcher { display: flex; gap: 10px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid white; background: transparent; color: white; text-decoration: none; border-radius: 3px; font-size: 0.9rem; display: inline-block; }
+        .lang-btn:hover { opacity: 0.8; }
+        .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 4rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 0.5rem; }
+        .section-subtitle { font-size: 1.8rem; margin: 2rem 0 1rem; color: #764ba2; }
+
+        .visa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .visa-card { background: #f8f9fa; border-radius: 10px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border-left: 4px solid #667eea; }
+        .visa-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .visa-card h3 { color: #667eea; margin-bottom: 1rem; font-size: 1.5rem; }
+        .visa-card .price { font-size: 1.3rem; font-weight: bold; color: #764ba2; margin-bottom: 1rem; }
+        .visa-card ul { list-style: none; padding-left: 0; }
+        .visa-card ul li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .visa-card ul li:before { content: "✓"; position: absolute; left: 0; color: #667eea; font-weight: bold; }
+
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #667eea; box-shadow: 0 10px 30px rgba(102,126,234,0.2); }
+        .pricing-card.featured { border-color: #667eea; transform: scale(1.05); }
+        .pricing-card h3 { color: #667eea; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #764ba2; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #667eea; margin-bottom: 0.5rem; }
+
+        .documents-list { background: #f8f9fa; border-radius: 10px; padding: 2rem; margin-top: 2rem; }
+        .documents-list ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .documents-list li { padding: 1rem; background: white; border-radius: 5px; border-left: 3px solid #667eea; }
+
+        .faq-item { background: #f8f9fa; border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s; }
+        .faq-item:hover { background: #e9ecef; }
+        .faq-question { font-weight: bold; color: #667eea; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question::after { content: "+"; font-size: 1.5rem; transition: transform 0.3s; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding-top: 0; }
+        .faq-item.active .faq-answer { max-height: 500px; padding-top: 1rem; }
+
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(102,126,234,0.4); }
+        .cta-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .ai-badge { display: inline-block; background: #ffd700; color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .section-title { font-size: 1.8rem; }
+            .nav-links { display: none; }
+            .process-step { flex-direction: column; }
+        }
     </style>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTSM9J2ZVT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CTSM9J2ZVT');
+    </script>
 </head>
 <body>
     <header class="header">
@@ -19,17 +102,261 @@
                 <li><a href="#contact">联系我们</a></li>
             </ul>
             <div class="lang-switcher">
-                <a href="/index.html" class="lang-btn">EN</a>
+                <a href="/services/visa.html" class="lang-btn">EN</a>
                 <button class="lang-btn" disabled>JP</button>
-                <a href="/index-zh.html" class="lang-btn">中文</a>
+                <a href="/services/visa-zh.html" class="lang-btn">中文</a>
             </div>
         </nav>
     </header>
+
     <section class="hero">
         <span class="ai-badge">🚀 AI驱动的服务</span>
         <h1>签证申请支持</h1>
-        <p>为在日本工作、生活和成功提供全面的移民服务</p>
+        <p>为在日本工作、生活与发展提供全面的入管手续支持</p>
     </section>
-    <!-- ... (rest of the content translated similarly) ... -->
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">我们的签证服务</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">凭借15年以上经验与500+成功案例，我们通过AI增强流程为您提供高效、准确、透明的签证支持。</p>
+            <div class="visa-grid">
+                <div class="visa-card">
+                    <h3>🎯 工作签证</h3>
+                    <div class="price">¥80,000 起</div>
+                    <ul>
+                        <li>工程师/人文知识/国际业务</li>
+                        <li>材料准备与审查</li>
+                        <li>入管局沟通代理</li>
+                        <li>AI生成辅助材料</li>
+                        <li>中/英/日三语支持</li>
+                    </ul>
+                </div>
+                <div class="visa-card">
+                    <h3>🌟 高度专门职</h3>
+                    <div class="price">¥120,000 起</div>
+                    <ul>
+                        <li>积分计算与优化</li>
+                        <li>快速通道办理</li>
+                        <li>家属签证协调</li>
+                        <li>永住路径规划</li>
+                        <li>高级待遇咨询</li>
+                    </ul>
+                </div>
+                <div class="visa-card">
+                    <h3>💼 经营管理签证</h3>
+                    <div class="price">¥200,000 起</div>
+                    <ul>
+                        <li>AI增强商业计划书</li>
+                        <li>公司设立支持</li>
+                        <li>办公室要件指导</li>
+                        <li>投资证明与整备</li>
+                        <li>全流程代理申请</li>
+                    </ul>
+                </div>
+                <div class="visa-card">
+                    <h3>👨‍👩‍👧 家属/配偶签证</h3>
+                    <div class="price">¥70,000 起</div>
+                    <ul>
+                        <li>配偶签证申请</li>
+                        <li>家属滞留资格手续</li>
+                        <li>关系证明文件整备</li>
+                        <li>财务证明指导</li>
+                        <li>面谈准备</li>
+                    </ul>
+                </div>
+                <div class="visa-card">
+                    <h3>🏠 永住</h3>
+                    <div class="price">¥150,000 起</div>
+                    <ul>
+                        <li>资格评估</li>
+                        <li>全套材料准备</li>
+                        <li>税金与社保核验</li>
+                        <li>申请递交</li>
+                        <li>长期跟进支持</li>
+                    </ul>
+                </div>
+                <div class="visa-card">
+                    <h3>🎓 留学签证</h3>
+                    <div class="price">¥60,000 起</div>
+                    <ul>
+                        <li>在留资格认定（COE）</li>
+                        <li>入学手续支持</li>
+                        <li>资金证明材料</li>
+                        <li>打工许可</li>
+                        <li>签证延长指导</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">收费方案</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>基础</h3>
+                    <div class="price">¥50,000~</div>
+                    <ul>
+                        <li>✓ 材料审阅</li>
+                        <li>✓ 基础咨询</li>
+                        <li>✓ 申请指导</li>
+                        <li>✓ 邮件支持</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">立即咨询</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>标准</h3>
+                    <div class="price">¥100,000~</div>
+                    <ul>
+                        <li>✓ 含基础套餐全部内容</li>
+                        <li>✓ 完整材料制作</li>
+                        <li>✓ 入管局沟通</li>
+                        <li>✓ AI文档生成</li>
+                        <li>✓ 优先支持</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">最受欢迎</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>高级</h3>
+                    <div class="price">¥150,000~</div>
+                    <ul>
+                        <li>✓ 含标准套餐全部内容</li>
+                        <li>✓ 加急办理</li>
+                        <li>✓ 专属顾问</li>
+                        <li>✓ 7x24小时支持</li>
+                        <li>✓ 成功保障</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">高端服务</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">所需材料</h2>
+            <p style="margin-top:1rem; font-size:1.1rem;">不同签证类型所需材料有所差异，以下为常见清单：</p>
+            <div class="documents-list">
+                <ul>
+                    <li>📄 护照</li>
+                    <li>📋 申请表（由本所提供）</li>
+                    <li>📸 证件照片</li>
+                    <li>🎓 学历证明</li>
+                    <li>💼 劳动合同或内定书</li>
+                    <li>🏢 公司登记资料</li>
+                    <li>💰 资金/收入证明</li>
+                    <li>🏠 住址证明</li>
+                    <li>📊 纳税证明</li>
+                    <li>📝 履历书</li>
+                    <li>🔍 其他辅助材料</li>
+                    <li>🌐 必要时的翻译件</li>
+                </ul>
+            </div>
+            <p style="margin-top: 1.5rem; font-style: italic; color: #666;">* 我们的AI系统会根据您的个案自动生成材料清单并提示缺漏。</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">办理流程</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>初次咨询</h3>
+                        <p>15分钟免费咨询，了解您的情况并评估可行方案，说明整体流程与时间。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>AI材料审查</h3>
+                        <p>48小时内完成材料检查，提示缺失项，大幅缩短准备时间。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>材料制作</h3>
+                        <p>制作申请表与证明文件，确保完整与准确。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>提交申请</h3>
+                        <p>向入管局递交申请，并代为沟通答复。</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>结果与跟进</h3>
+                        <p>跟进审查状态，按要求补交材料，直至取得结果。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="faq">
+            <h2 class="section-title">常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question">办理时间需要多久？</div>
+                <div class="faq-answer">不同签证类型时间不同。工作签证通常1-3个月；永住4-12个月。我们的AI流程可减少往返与错误。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">成功率如何？</div>
+                <div class="faq-answer">我们在各类签证中保持95%以上成功率，累计500+成功案例。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">是否必须到所里面谈？</div>
+                <div class="faq-answer">多数案件可在线完成。我们支持视频会议与安全的材料传输。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">是否提供中文支持？</div>
+                <div class="faq-answer">是，我们提供中文、英文、日文完整支持。</div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>准备开启您的日本之旅？</h2>
+            <p>预约15分钟免费咨询，制定您的签证策略</p>
+            <a href="https://calendly.com/mayuha-japan" class="cta-button" style="background: white; color: #667eea;">预约免费咨询</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">或发送邮件至：<a href="mailto:fanvankai@gmail.com" style="color: white; text-decoration: underline;">fanvankai@gmail.com</a></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Mayuha 行政书士事务所 保留所有权利</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Licensed Administrative Scrivener ｜ 日本大阪</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => { item.classList.toggle('active'); });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        // Track calendar booking clicks
+        document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
+            link.addEventListener('click', function() {
+                gtag('event', 'book_appointment', {
+                    'event_category': 'Booking',
+                    'event_label': 'Calendar Booking Click'
+                });
+            });
+        });
+
+        // Track contact link clicks (mailto)
+        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                gtag('event', 'contact_link_click', {
+                    'event_category': 'Contact',
+                    'event_label': 'Email Link Click'
+                });
+            });
+        });
+    </script>
 </body>
 </html>

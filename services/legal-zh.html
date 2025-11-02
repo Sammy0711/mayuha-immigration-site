@@ -6,8 +6,16 @@
     <title>法律文件 - Mayuha Japan Gateway</title> 
     <style> 
     /* ... (styles go here, same as original) ... */ 
-    </style> 
-</head> 
+    </style>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTSM9J2ZVT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CTSM9J2ZVT');
+    </script>
+</head>
 <body> 
     <header class="header"> 
         <nav class="nav-container"> 
@@ -30,6 +38,27 @@
         <h1>法律文件</h1> 
         <p>为您的所有法律需求提供专业的文档准备、翻译和认证服务</p> 
     </section> 
-    <!-- ... (rest of the content translated similarly) ... --> 
-</body> 
+    <!-- ... (rest of the content translated similarly) ... -->
+    <script>
+        // Track calendar booking clicks
+        document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
+            link.addEventListener('click', function() {
+                gtag('event', 'book_appointment', {
+                    'event_category': 'Booking',
+                    'event_label': 'Calendar Booking Click'
+                });
+            });
+        });
+
+        // Track contact link clicks (mailto)
+        document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                gtag('event', 'contact_link_click', {
+                    'event_category': 'Contact',
+                    'event_label': 'Email Link Click'
+                });
+            });
+        });
+    </script>
+</body>
 </html>
