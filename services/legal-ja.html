@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法的文書作成 - Mayuha Japan Gateway</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+        .header { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+        .lang-switcher { display: flex; gap: 10px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid white; background: transparent; color: white; text-decoration: none; border-radius: 3px; font-size: 0.9rem; display: inline-block; }
+        .lang-btn:hover { opacity: 0.8; } .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hero { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 8rem 2rem 4rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #fa709a; border-bottom: 3px solid #fa709a; padding-bottom: 0.5rem; }
+        .document-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .doc-card { background: linear-gradient(135deg, #fff9f0 0%, #ffe6d5 100%); border-radius: 15px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid #fa709a; }
+        .doc-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(250, 112, 154, 0.2); }
+        .doc-card h3 { color: #fa709a; margin-bottom: 1rem; font-size: 1.6rem; }
+        .doc-card .price { font-size: 1.4rem; font-weight: bold; color: #fee140; margin-bottom: 1rem; }
+        .doc-card ul { list-style: none; padding: 0; }
+        .doc-card ul li { padding: 0.6rem 0; padding-left: 1.5rem; position: relative; }
+        .doc-card ul li:before { content: "✓"; position: absolute; left: 0; color: #fa709a; font-weight: bold; }
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #fa709a; box-shadow: 0 10px 30px rgba(250, 112, 154, 0.2); }
+        .pricing-card.featured { border-color: #fee140; transform: scale(1.05); }
+        .pricing-card h3 { color: #fa709a; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #fee140; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .document-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .doc-type { background: linear-gradient(135deg, #fff9f0 0%, #ffe6d5 100%); border-radius: 10px; padding: 1.5rem; text-align: center; transition: transform 0.3s; border: 1px solid #fa709a; }
+        .doc-type:hover { transform: translateY(-5px); }
+        .doc-type .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .doc-type h4 { color: #fa709a; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #fa709a; margin-bottom: 0.5rem; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(250, 112, 154, 0.4); }
+        .cta-section { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .ai-badge { display: inline-block; background: #4facfe; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+        .quality-badges { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; }
+        .badge { background: white; padding: 1rem 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
+        .badge .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .badge h4 { color: #fa709a; font-size: 1rem; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index-ja.html" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/index-ja.html">ホーム</a></li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#about">会社概要</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <a href="/services/legal.html" class="lang-btn">EN</a>
+                <a href="/services/legal-ja.html" class="lang-btn" style="background:#fff;color:#fa709a;">JP</a>
+                <a href="/services/legal-zh.html" class="lang-btn">中文</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI検証ドキュメント</span>
+        <h1>法的文書作成</h1>
+        <p>契約・翻訳認証・各種申請書の作成を、AIと行政書士のダブルチェックで高品質に</p>
+    </section>
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">文書サービス</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">行政書士による作成・認証・翻訳にAI検証を加え、正確性と完全性を確保します。</p>
+            <div class="document-services">
+                <div class="doc-card">
+                    <h3>📜 契約書作成</h3>
+                    <div class="price">¥50,000〜</div>
+                    <ul>
+                        <li>雇用契約</li>
+                        <li>業務委託契約</li>
+                        <li>NDA/秘密保持</li>
+                        <li>パートナー契約</li>
+                        <li>ライセンス契約</li>
+                        <li>AI条項検証</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>🌐 翻訳・認証</h3>
+                    <div class="price">¥15,000〜</div>
+                    <ul>
+                        <li>法文書の翻訳</li>
+                        <li>認証翻訳</li>
+                        <li>アポスティーユ</li>
+                        <li>公証サポート</li>
+                        <li>日英中に対応</li>
+                        <li>特急可</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>🏢 会社関連文書</h3>
+                    <div class="price">¥30,000〜</div>
+                    <ul>
+                        <li>定款・内規</li>
+                        <li>取締役会決議</li>
+                        <li>株主間契約</li>
+                        <li>定款変更・登記</li>
+                        <li>コンプライアンス文書</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>👥 人事文書</h3>
+                    <div class="price">¥40,000〜</div>
+                    <ul>
+                        <li>就業規則</li>
+                        <li>雇用契約</li>
+                        <li>競業避止</li>
+                        <li>解雇・終了文書</li>
+                        <li>労法コンプライアンス</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>🏠 不動産文書</h3>
+                    <div class="price">¥35,000〜</div>
+                    <ul>
+                        <li>賃貸借契約</li>
+                        <li>売買契約</li>
+                        <li>登記申請</li>
+                        <li>名義変更</li>
+                        <li>管理委託契約</li>
+                        <li>抵当権関連</li>
+                    </ul>
+                </div>
+                <div class="doc-card">
+                    <h3>⚖️ 行政手続書類</h3>
+                    <div class="price">¥45,000〜</div>
+                    <ul>
+                        <li>官公庁提出書類</li>
+                        <li>行政不服申立て</li>
+                        <li>許認可申請</li>
+                        <li>免許更新</li>
+                        <li>各種届出</li>
+                        <li>コンプライアンス報告</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">取り扱い文書の例</h2>
+            <div class="document-types">
+                <div class="doc-type"><div class="icon">📋</div><h4>契約</h4><p>各種ビジネス契約</p></div>
+                <div class="doc-type"><div class="icon">💼</div><h4>雇用</h4><p>人事・労務文書</p></div>
+                <div class="doc-type"><div class="icon">🏢</div><h4>会社</h4><p>登記・会社文書</p></div>
+                <div class="doc-type"><div class="icon">🏠</div><h4>不動産</h4><p>物件・登記関連</p></div>
+                <div class="doc-type"><div class="icon">🛂</div><h4>入管</h4><p>在留関連書類</p></div>
+                <div class="doc-type"><div class="icon">🌐</div><h4>翻訳</h4><p>認証翻訳</p></div>
+                <div class="doc-type"><div class="icon">📜</div><h4>公証</h4><p>認証手続き</p></div>
+                <div class="doc-type"><div class="icon">⚖️</div><h4>行政</h4><p>官公庁提出</p></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">料金プラン</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>単品作成</h3>
+                    <div class="price">¥15,000~</div>
+                    <ul>
+                        <li>✓ 1件の文書作成</li>
+                        <li>✓ 基本レビュー</li>
+                        <li>✓ 標準納期（5-7日）</li>
+                        <li>✓ 1回の修正</li>
+                        <li>✓ メール納品</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">依頼する</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>文書セット</h3>
+                    <div class="price">¥80,000~</div>
+                    <ul>
+                        <li>✓ 関連文書最大5件</li>
+                        <li>✓ AIによる総合検証</li>
+                        <li>✓ 優先納期（3-5日）</li>
+                        <li>✓ 修正無制限</li>
+                        <li>✓ コンサル付き</li>
+                        <li>✓ 公証調整</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">人気プラン</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>継続サポート</h3>
+                    <div class="price">¥200,000~/月</div>
+                    <ul>
+                        <li>✓ 文書作成無制限</li>
+                        <li>✓ 専任ドキュメント担当</li>
+                        <li>✓ 特急（24-48時間）</li>
+                        <li>✓ テンプレートライブラリ</li>
+                        <li>✓ 法令モニタリング</li>
+                        <li>✓ 24/7優先対応</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">企業向け</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">品質保証</h2>
+            <div class="quality-badges">
+                <div class="badge"><div class="icon">🤖</div><h4>AI検証</h4><p>完全性と整合性を自動チェック</p></div>
+                <div class="badge"><div class="icon">👨‍⚖️</div><h4>有資格者</h4><p>行政書士による確認</p></div>
+                <div class="badge"><div class="icon">✅</div><h4>高精度</h4><p>エラーのない成果物</p></div>
+                <div class="badge"><div class="icon">🔒</div><h4>機密保持</h4><p>厳格な情報管理</p></div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section-title">作成プロセス</h2>
+            <div class="process-steps">
+                <div class="process-step"><div class="step-number">1</div><div class="step-content"><h3>要件確認</h3><p>目的・形式・使用先を確認し、現資料を精査。</p></div></div>
+                <div class="process-step"><div class="step-number">2</div><div class="step-content"><h3>情報収集</h3><p>必要情報・証憑を収集。ヒアリングを実施。</p></div></div>
+                <div class="process-step"><div class="step-number">3</div><div class="step-content"><h3>ドラフト/AI検証</h3><p>AI支援で起案し、法令・整合性を検証。</p></div></div>
+                <div class="process-step"><div class="step-number">4</div><div class="step-content"><h3>専門家レビュー</h3><p>行政書士が最終確認。</p></div></div>
+                <div class="process-step"><div class="step-number">5</div><div class="step-content"><h3>ご確認/修正</h3><p>フィードバックを反映し、版を確定。</p></div></div>
+                <div class="process-step"><div class="step-number">6</div><div class="step-content"><h3>納品/認証</h3><p>PDF/Word等で納品、公証やApostilleも手配可。</p></div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="pricing-table" style="grid-template-columns: 1fr; gap: 1rem;">
+                <div class="pricing-card" style="text-align:left;"><h3>対応言語は？</h3><p>日本語・英語・中国語。AI初訳＋人手校正で高品質を担保。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>法的有効性は？</h3><p>行政書士の認証翻訳は官公庁・裁判所・入管で受理されます。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>納期はどれくらい？</h3><p>標準5〜7営業日、優先3〜5日、特急24〜48時間。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>他者作成のレビュー可？</h3><p>可。法適合性・漏れ・矛盾を重点チェックします。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>テンプレート提供は？</h3><p>継続プランにテンプレート集が含まれます。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>公証は手配できる？</h3><p>認証公証人との調整から当日段取りまで支援します。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>情報は安全？</h3><p>厳格なアクセス管理と暗号化を実施。NDAにも対応。</p></div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>法的文書はプロにお任せください</h2>
+            <p>無料相談で要件を整理し、最適な進め方をご提案します</p>
+            <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" class="cta-button" style="background: white; color: #fa709a;" target="_blank" rel="noopener noreferrer">無料相談を予約</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">メール: <a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a></p>
+        </div>
+    </div>
+
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 20px; text-align: center; margin-top: 80px;">
+        <h2 style="color: white; font-size: 2em; margin-bottom: 20px;">今すぐ始めませんか？</h2>
+        <p style="color: white; font-size: 1.2em; margin-bottom: 30px;">無料相談のお問い合わせはこちら</p>
+        <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" style="background: #f59e0b; color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-size: 1.1em; font-weight: bold;" target="_blank" rel="noopener noreferrer">今すぐ相談</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Mayuha 行政書士事務所. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">行政書士登録｜大阪</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = this.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
+    </script>
+</body>
+</html>
+

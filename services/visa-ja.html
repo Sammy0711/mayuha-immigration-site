@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビザ申請サポート - Mayuha Japan Gateway</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+        .lang-switcher { display: flex; gap: 10px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid white; background: transparent; color: white; text-decoration: none; border-radius: 3px; font-size: 0.9rem; display: inline-block; }
+        .lang-btn:hover { opacity: 0.8; } .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 4rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #667eea; border-bottom: 3px solid #667eea; padding-bottom: 0.5rem; }
+        .visa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .visa-card { background: #f8f9fa; border-radius: 10px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border-left: 4px solid #667eea; }
+        .visa-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .visa-card h3 { color: #667eea; margin-bottom: 1rem; font-size: 1.5rem; }
+        .visa-card .price { font-size: 1.3rem; font-weight: bold; color: #764ba2; margin-bottom: 1rem; }
+        .visa-card ul { list-style: none; padding-left: 0; }
+        .visa-card ul li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .visa-card ul li:before { content: "✓"; position: absolute; left: 0; color: #667eea; font-weight: bold; }
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #667eea; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2); }
+        .pricing-card.featured { border-color: #667eea; transform: scale(1.05); }
+        .pricing-card h3 { color: #667eea; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #764ba2; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #667eea; margin-bottom: 0.5rem; }
+        .documents-list { background: #f8f9fa; border-radius: 10px; padding: 2rem; margin-top: 2rem; }
+        .documents-list ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .documents-list li { padding: 1rem; background: white; border-radius: 5px; border-left: 3px solid #667eea; }
+        .faq-item { background: #f8f9fa; border-radius: 10px; padding: 1.5rem; margin-bottom: 1rem; cursor: pointer; transition: all 0.3s; }
+        .faq-item:hover { background: #e9ecef; }
+        .faq-question { font-weight: bold; color: #667eea; display: flex; justify-content: space-between; align-items: center; }
+        .faq-question::after { content: "+"; font-size: 1.5rem; transition: transform 0.3s; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding-top: 0; }
+        .faq-item.active .faq-answer { max-height: 500px; padding-top: 1rem; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4); }
+        .cta-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .ai-badge { display: inline-block; background: #ffd700; color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index-ja.html" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/index-ja.html">ホーム</a></li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#about">会社概要</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <a href="/services/visa.html" class="lang-btn">EN</a>
+                <a href="/services/visa-ja.html" class="lang-btn" style="background:#fff;color:#667eea;">JP</a>
+                <a href="/services/visa-zh.html" class="lang-btn">中文</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI活用サービス</span>
+        <h1>ビザ申請サポート</h1>
+        <p>日本での就労・生活・成功のための入管手続きを、実務経験とAIで強力にサポート</p>
+    </section>
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">提供するビザサポート</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">15年以上の経験と500件超の実績。AI活用により、正確性・スピード・透明性を高水準で両立します。</p>
+
+            <div class="visa-grid">
+                <div class="visa-card">
+                    <h3>🎯 就労ビザ</h3>
+                    <div class="price">From ¥80,000</div>
+                    <ul>
+                        <li>技術・人文知識・国際業務 など</li>
+                        <li>書類作成・レビュー</li>
+                        <li>入管対応</li>
+                        <li>AIによる補足資料作成</li>
+                        <li>日英対応</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>🌟 高度専門職</h3>
+                    <div class="price">From ¥120,000</div>
+                    <ul>
+                        <li>ポイント計算と最適化</li>
+                        <li>迅速審査のサポート</li>
+                        <li>家族帯同手続き</li>
+                        <li>永住への道筋設計</li>
+                        <li>特典の活用支援</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>💼 経営・管理</h3>
+                    <div class="price">From ¥200,000</div>
+                    <ul>
+                        <li>AI強化の事業計画</li>
+                        <li>会社設立サポート</li>
+                        <li>事務所要件の助言</li>
+                        <li>投資・資金証明の整備</li>
+                        <li>申請一式の代行</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>👨‍👩‍👧 家族・配偶者</h3>
+                    <div class="price">From ¥70,000</div>
+                    <ul>
+                        <li>配偶者ビザ</li>
+                        <li>家族滞在</li>
+                        <li>関係性資料の整備</li>
+                        <li>資力証明のアドバイス</li>
+                        <li>面接対策</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>🏠 永住許可</h3>
+                    <div class="price">From ¥150,000</div>
+                    <ul>
+                        <li>要件診断</li>
+                        <li>書類一式の準備</li>
+                        <li>税・社保の確認</li>
+                        <li>申請提出</li>
+                        <li>長期フォロー</li>
+                    </ul>
+                </div>
+
+                <div class="visa-card">
+                    <h3>🎓 留学ビザ</h3>
+                    <div class="price">From ¥60,000</div>
+                    <ul>
+                        <li>在留資格認定（COE）</li>
+                        <li>学校入学手続き</li>
+                        <li>資金証明</li>
+                        <li>資格外活動許可</li>
+                        <li>在留期間更新</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">料金プラン</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>ベーシック</h3>
+                    <div class="price">¥50,000~</div>
+                    <ul>
+                        <li>✓ 書類チェック</li>
+                        <li>✓ 基本コンサル</li>
+                        <li>✓ 申請手順の案内</li>
+                        <li>✓ メール対応</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">相談する</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>スタンダード</h3>
+                    <div class="price">¥100,000~</div>
+                    <ul>
+                        <li>✓ ベーシック全て</li>
+                        <li>✓ 書類一式の作成</li>
+                        <li>✓ 入管窓口対応</li>
+                        <li>✓ AI文書生成</li>
+                        <li>✓ 優先対応</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">人気プラン</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>プレミアム</h3>
+                    <div class="price">¥150,000~</div>
+                    <ul>
+                        <li>✓ スタンダード全て</li>
+                        <li>✓ 特急対応</li>
+                        <li>✓ 専任コンサル</li>
+                        <li>✓ 24/7サポート</li>
+                        <li>✓ 成功保証（条件あり）</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">最上位</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">必要書類</h2>
+            <p style="margin-top: 1rem; font-size: 1.1rem;">ビザ種別により異なりますが、一般的には以下が必要です。</p>
+            <div class="documents-list">
+                <ul>
+                    <li>📄 パスポート</li>
+                    <li>📋 申請書（当方で準備）</li>
+                    <li>📸 証明写真</li>
+                    <li>🎓 学歴証明</li>
+                    <li>💼 雇用契約書等</li>
+                    <li>🏢 会社登記書類</li>
+                    <li>💰 資産・収入証明</li>
+                    <li>🏠 住所証明</li>
+                    <li>📊 納税証明</li>
+                    <li>📝 履歴書</li>
+                    <li>🔍 追加資料（必要に応じて）</li>
+                    <li>🌐 翻訳（必要に応じて）</li>
+                </ul>
+            </div>
+            <p style="margin-top: 1.5rem; font-style: italic; color: #666;">* AIにより不足書類を自動特定し、個別の要件に最適化します。</p>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section-title">申請プロセス</h2>
+            <div class="process-steps">
+                <div class="process-step"><div class="step-number">1</div><div class="step-content"><h3>初回相談</h3><p>15分の無料相談で状況を把握し、最適な戦略を提案します。</p></div></div>
+                <div class="process-step"><div class="step-number">2</div><div class="step-content"><h3>AI文書分析</h3><p>48時間以内にAIで書類を分析し、抜け漏れをチェックします。</p></div></div>
+                <div class="process-step"><div class="step-number">3</div><div class="step-content"><h3>書類作成</h3><p>必要書類・申請書・補足資料を高品質で作成します。</p></div></div>
+                <div class="process-step"><div class="step-number">4</div><div class="step-content"><h3>申請</h3><p>入管への申請・連絡対応を代行します。</p></div></div>
+                <div class="process-step"><div class="step-number">5</div><div class="step-content"><h3>結果・フォロー</h3><p>進捗を随時共有し、追加要請に迅速対応します。</p></div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="faq-item"><div class="faq-question">審査期間はどれくらい？</div><div class="faq-answer">就労は1〜3ヶ月、永住は4〜12ヶ月が目安です。AIにより最初から精度を高め、手戻りを抑制します。</div></div>
+            <div class="faq-item"><div class="faq-question">成功率は？</div><div class="faq-answer">総合成功率95%以上、実績500件超。AIでリスクを事前に把握・改善します。</div></div>
+            <div class="faq-item"><div class="faq-question">来所は必要？</div><div class="faq-answer">原則オンラインで完結可能です。ご希望があれば対面も対応します。</div></div>
+            <div class="faq-item"><div class="faq-question">対応言語は？</div><div class="faq-answer">日本語・英語・中国語に対応。AI翻訳も併用し、確実な意思疎通を実現します。</div></div>
+            <div class="faq-item"><div class="faq-question">不許可の場合は？</div><div class="faq-answer">理由分析の上、最適な再申請戦略をご提案します。プレミアムは条件付き保証あり。</div></div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>日本での一歩を、今すぐ</h2>
+            <p>無料15分相談を予約し、最適なビザ戦略を決めましょう</p>
+            <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" class="cta-button" style="background: white; color: #667eea;" target="_blank" rel="noopener noreferrer">無料相談を予約</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">メール: <a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a></p>
+        </div>
+    </div>
+
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 20px; text-align: center; margin-top: 80px;">
+        <h2 style="color: white; font-size: 2em; margin-bottom: 20px;">今すぐ始めませんか？</h2>
+        <p style="color: white; font-size: 1.2em; margin-bottom: 30px;">無料相談のお問い合わせはこちら</p>
+        <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" style="background: #f59e0b; color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-size: 1.1em; font-weight: bold;" target="_blank" rel="noopener noreferrer">今すぐ相談</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Mayuha 行政書士事務所. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">行政書士登録｜大阪</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => { item.addEventListener('click', () => { item.classList.toggle('active'); }); });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = this.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
+    </script>
+</body>
+</html>
+

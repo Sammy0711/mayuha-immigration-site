@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ビジネスコンサルティング - Mayuha Japan Gateway</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+        .header { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+        .lang-switcher { display: flex; gap: 10px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid white; background: transparent; color: white; text-decoration: none; border-radius: 3px; font-size: 0.9rem; display: inline-block; }
+        .lang-btn:hover { opacity: 0.8; } .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hero { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 8rem 2rem 4rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #00f2fe; border-bottom: 3px solid #00f2fe; padding-bottom: 0.5rem; }
+        .consulting-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .service-card { background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%); border-radius: 15px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid #4facfe; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(79, 172, 254, 0.2); }
+        .service-card h3 { color: #00f2fe; margin-bottom: 1rem; font-size: 1.6rem; }
+        .service-card .price { font-size: 1.4rem; font-weight: bold; color: #4facfe; margin-bottom: 1rem; }
+        .service-card ul { list-style: none; padding: 0; }
+        .service-card ul li { padding: 0.6rem 0; padding-left: 1.5rem; position: relative; }
+        .service-card ul li:before { content: "✓"; position: absolute; left: 0; color: #00f2fe; font-weight: bold; }
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #00f2fe; box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2); }
+        .pricing-card.featured { border-color: #4facfe; transform: scale(1.05); }
+        .pricing-card h3 { color: #00f2fe; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #4facfe; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .expertise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .expertise-item { background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%); border-radius: 10px; padding: 1.5rem; text-align: center; transition: transform 0.3s; }
+        .expertise-item:hover { transform: translateY(-5px); }
+        .expertise-item .icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .expertise-item h4 { color: #00f2fe; margin-bottom: 0.5rem; }
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #00f2fe; margin-bottom: 0.5rem; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4); }
+        .cta-section { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .ai-badge { display: inline-block; background: #ffd700; color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+        .case-study { background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%); border-radius: 15px; padding: 2rem; margin-top: 2rem; border-left: 5px solid #4facfe; }
+        .case-study h4 { color: #00f2fe; margin-bottom: 1rem; font-size: 1.3rem; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index-ja.html" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/index-ja.html">ホーム</a></li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#about">会社概要</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <a href="/services/consulting.html" class="lang-btn">EN</a>
+                <a href="/services/consulting-ja.html" class="lang-btn" style="background:#fff;color:#4facfe;">JP</a>
+                <a href="/services/consulting-zh.html" class="lang-btn">中文</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI活用戦略</span>
+        <h1>ビジネスコンサルティング</h1>
+        <p>AI分析と15年以上の実務で、日本市場での成長を戦略的にご支援</p>
+    </section>
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">コンサルティング領域</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">市場参入・計画策定・パートナー構築・人事/法令・国際展開・業務改善など、成長の鍵となる領域を包括的に支援します。</p>
+
+            <div class="consulting-services">
+                <div class="service-card">
+                    <h3>🎯 市場参入戦略</h3>
+                    <div class="price">¥200,000〜</div>
+                    <ul>
+                        <li>市場調査・分析</li>
+                        <li>競合分析</li>
+                        <li>参入戦略の策定</li>
+                        <li>規制・コンプライアンス設計</li>
+                        <li>パートナー探索</li>
+                        <li>AIによる市場インテリジェンス</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>📊 事業計画</h3>
+                    <div class="price">¥150,000〜</div>
+                    <ul>
+                        <li>ビジネスプラン</li>
+                        <li>財務予測・モデル化</li>
+                        <li>Go-To-Market戦略</li>
+                        <li>投資家向け資料</li>
+                        <li>AI市場データ生成</li>
+                        <li>リスク評価と対策</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>🤝 パートナー開拓</h3>
+                    <div class="price">¥250,000〜</div>
+                    <ul>
+                        <li>候補抽出・デューデリ</li>
+                        <li>スキーム設計</li>
+                        <li>交渉サポート</li>
+                        <li>契約レビュー</li>
+                        <li>JV設立支援</li>
+                        <li>関係マネジメント</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>💼 人事・法令対応</h3>
+                    <div class="price">¥180,000〜</div>
+                    <ul>
+                        <li>就業規則/人事制度</li>
+                        <li>労働法コンプライアンス</li>
+                        <li>外国人材受入れ</li>
+                        <li>スタッフのビザ調整</li>
+                        <li>給与・社保体制</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>🌐 国際展開</h3>
+                    <div class="price">¥300,000〜</div>
+                    <ul>
+                        <li>越境戦略</li>
+                        <li>国際取引コンプライアンス</li>
+                        <li>輸出入手続き</li>
+                        <li>海外子会社設立</li>
+                        <li>サプライチェーン最適化</li>
+                        <li>マルチマーケット連携</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>🔧 業務最適化</h3>
+                    <div class="price">¥220,000〜</div>
+                    <ul>
+                        <li>プロセス改善</li>
+                        <li>効率化施策</li>
+                        <li>技術導入計画</li>
+                        <li>品質管理</li>
+                        <li>コスト削減</li>
+                        <li>KPI設計</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">得意分野</h2>
+            <div class="expertise-grid">
+                <div class="expertise-item"><div class="icon">🏭</div><h4>製造</h4><p>生産体制・SCM</p></div>
+                <div class="expertise-item"><div class="icon">💻</div><h4>テクノロジー</h4><p>IT/ソフトウェア</p></div>
+                <div class="expertise-item"><div class="icon">🛍️</div><h4>EC</h4><p>オンライン小売</p></div>
+                <div class="expertise-item"><div class="icon">🏨</div><h4>ホスピタリティ</h4><p>ホテル/飲食</p></div>
+                <div class="expertise-item"><div class="icon">🎓</div><h4>教育</h4><p>語学/研修</p></div>
+                <div class="expertise-item"><div class="icon">🏥</div><h4>医療</h4><p>ヘルスケア</p></div>
+                <div class="expertise-item"><div class="icon">🎨</div><h4>クリエイティブ</h4><p>デザイン/制作</p></div>
+                <div class="expertise-item"><div class="icon">💰</div><h4>金融</h4><p>フィンテック等</p></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">コンサルティングプラン</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>クイックスタート</h3>
+                    <div class="price">¥100,000</div>
+                    <ul>
+                        <li>✓ 2時間×3回</li>
+                        <li>✓ 初期市場評価</li>
+                        <li>✓ 戦略提言</li>
+                        <li>✓ メール支援（1ヶ月）</li>
+                        <li>✓ アクションプラン</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">相談する</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>グロースパートナー</h3>
+                    <div class="price">¥300,000</div>
+                    <ul>
+                        <li>✓ 2時間×8回</li>
+                        <li>✓ 事業計画</li>
+                        <li>✓ 市場参入戦略</li>
+                        <li>✓ AI分析</li>
+                        <li>✓ 優先対応（3ヶ月）</li>
+                        <li>✓ 四半期レビュー</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">人気プラン</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>ストラテジックアドバイザリー</h3>
+                    <div class="price">¥800,000</div>
+                    <ul>
+                        <li>✓ 6ヶ月無制限</li>
+                        <li>✓ 専任アドバイザー</li>
+                        <li>✓ フル市場調査</li>
+                        <li>✓ パートナー/投資連携</li>
+                        <li>✓ 24/7優先対応</li>
+                        <li>✓ 役員向けプレゼン</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">上位プラン</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section-title">コンサルティングの流れ</h2>
+            <div class="process-steps">
+                <div class="process-step"><div class="step-number">1</div><div class="step-content"><h3>調査・評価</h3><p>目的・現状・課題を把握。AIで市場データを分析。</p></div></div>
+                <div class="process-step"><div class="step-number">2</div><div class="step-content"><h3>戦略立案</h3><p>マイルストーンとKPIを設計。データドリブンで策定。</p></div></div>
+                <div class="process-step"><div class="step-number">3</div><div class="step-content"><h3>実行支援</h3><p>実務レベルで実装を支援。課題解決を伴走。</p></div></div>
+                <div class="process-step"><div class="step-number">4</div><div class="step-content"><h3>モニタリング/最適化</h3><p>レビューと最適化で継続改善。</p></div></div>
+                <div class="process-step"><div class="step-number">5</div><div class="step-content"><h3>長期的パートナー</h3><p>新課題や拡張にも継続対応。</p></div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">成功事例</h2>
+            <div class="case-study">
+                <h4>🚀 AIスタートアップ：シリーズA調達</h4>
+                <p><strong>課題:</strong> 日本進出と資金調達の同時推進。</p>
+                <p><strong>施策:</strong> 参入戦略、投資家資料、主要VCへの紹介。</p>
+                <p><strong>結果:</strong> 6ヶ月で500万USD調達、KK設立、創業者の在留確保。</p>
+            </div>
+            <div class="case-study">
+                <h4>🏭 製造：サプライチェーン最適化</h4>
+                <p><strong>課題:</strong> コンプライアンスと効率性の課題。</p>
+                <p><strong>施策:</strong> 監査・再設計・品質管理導入。</p>
+                <p><strong>結果:</strong> コスト40%削減、ISO取得、生産性60%向上。</p>
+            </div>
+            <div class="case-study">
+                <h4>🛍️ EC：日本市場参入</h4>
+                <p><strong>課題:</strong> ローカル知見の不足。</p>
+                <p><strong>施策:</strong> ローカライズ戦略、物流/法令設計。</p>
+                <p><strong>結果:</strong> 初年度GMV¥5億、主要小売と提携。</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="pricing-table" style="grid-template-columns: 1fr; gap: 1rem;">
+                <div class="pricing-card" style="text-align:left;"><h3>対応業界は？</h3><p>テック、製造、EC、ホテル、教育、医療、プロフェッショナルサービス等に対応。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>AIのメリットは？</h3><p>リアルタイムの市場データ、競合分析、トレンド、シナリオ分析を提供します。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>資金調達の支援は？</h3><p>資料作成から投資家紹介まで一気通貫で支援します。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>継続支援はある？</h3><p>月額リテーナーで定例レビュー、優先対応を提供します。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>何が強み？</h3><p>行政書士実務×AI×多言語×日・海外ビジネスの橋渡し力。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>どれくらいで開始？</h3><p>最短48時間で初回、1週間以内に本格開始。緊急対応可。</p></div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>日本での成長を、次の段階へ</h2>
+            <p>無料の戦略相談を予約して、目標を具体化しましょう</p>
+            <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" class="cta-button" style="background: white; color: #00f2fe;" target="_blank" rel="noopener noreferrer">無料相談を予約</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">メール: <a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a></p>
+        </div>
+    </div>
+
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 20px; text-align: center; margin-top: 80px;">
+        <h2 style="color: white; font-size: 2em; margin-bottom: 20px;">今すぐ始めませんか？</h2>
+        <p style="color: white; font-size: 1.2em; margin-bottom: 30px;">無料相談のお問い合わせはこちら</p>
+        <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" style="background: #f59e0b; color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-size: 1.1em; font-weight: bold;" target="_blank" rel="noopener noreferrer">今すぐ相談</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Mayuha 行政書士事務所. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">行政書士登録｜大阪</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = this.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
+    </script>
+</body>
+</html>
+

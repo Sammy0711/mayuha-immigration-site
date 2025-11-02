@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会社設立サポート - Mayuha Japan Gateway</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+        .header { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+        .lang-switcher { display: flex; gap: 10px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid white; background: transparent; color: white; text-decoration: none; border-radius: 3px; font-size: 0.9rem; display: inline-block; }
+        .lang-btn:hover { opacity: 0.8; } .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hero { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 8rem 2rem 4rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #f5576c; border-bottom: 3px solid #f5576c; padding-bottom: 0.5rem; }
+        .company-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .company-card { background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%); border-radius: 15px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid #f093fb; }
+        .company-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(245, 87, 108, 0.2); }
+        .company-card h3 { color: #f5576c; margin-bottom: 1rem; font-size: 1.6rem; }
+        .company-card .price { font-size: 1.4rem; font-weight: bold; color: #f093fb; margin-bottom: 1rem; }
+        .company-card ul { list-style: none; padding: 0; }
+        .company-card ul li { padding: 0.6rem 0; padding-left: 1.5rem; position: relative; }
+        .company-card ul li:before { content: "✓"; position: absolute; left: 0; color: #f5576c; font-weight: bold; }
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #f5576c; box-shadow: 0 10px 30px rgba(245, 87, 108, 0.2); }
+        .pricing-card.featured { border-color: #f093fb; transform: scale(1.05); }
+        .pricing-card h3 { color: #f5576c; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #f093fb; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #f5576c; margin-bottom: 0.5rem; }
+        .documents-list { background: linear-gradient(135deg, #fff5f7 0%, #ffe6eb 100%); border-radius: 10px; padding: 2rem; margin-top: 2rem; }
+        .documents-list ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .documents-list li { padding: 1rem; background: white; border-radius: 5px; border-left: 3px solid #f5576c; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4); }
+        .cta-section { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .ai-badge { display: inline-block; background: #ffd700; color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/index-ja.html" class="logo">🌸 Mayuha Japan Gateway</a>
+            <ul class="nav-links">
+                <li><a href="/index-ja.html">ホーム</a></li>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#about">会社概要</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <a href="/services/company.html" class="lang-btn">EN</a>
+                <a href="/services/company-ja.html" class="lang-btn" style="background:#fff;color:#f093fb;">JP</a>
+                <a href="/services/company-zh.html" class="lang-btn">中文</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <span class="ai-badge">🚀 AI強化 会社設立</span>
+        <h1>会社設立サポート</h1>
+        <p>事業計画から登記・口座開設・税務まで。日本での会社設立をワンストップで支援</p>
+    </section>
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">会社形態と特徴</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">日本での起業には綿密な計画と法令遵守が必要です。AIで高品質な事業計画を作成し、手続の確実性を高めます。</p>
+
+            <div class="company-types">
+                <div class="company-card">
+                    <h3>🏢 株式会社（KK）</h3>
+                    <div class="price">起価 ¥300,000</div>
+                    <ul>
+                        <li>最も一般的で信頼性が高い形態</li>
+                        <li>最低資本金：¥1</li>
+                        <li>定款作成</li>
+                        <li>法務局登記</li>
+                        <li>会社印作成</li>
+                        <li>税務署届出</li>
+                    </ul>
+                </div>
+                <div class="company-card">
+                    <h3>🏛️ 合同会社（GK）</h3>
+                    <div class="price">起価 ¥200,000</div>
+                    <ul>
+                        <li>柔軟でコストが低いLLC形態</li>
+                        <li>設立手続が比較的容易</li>
+                        <li>小規模事業に最適</li>
+                        <li>管理体制が自由</li>
+                        <li>スタートアップに人気</li>
+                    </ul>
+                </div>
+                <div class="company-card">
+                    <h3>🏪 日本支店（Branch）</h3>
+                    <div class="price">起価 ¥150,000</div>
+                    <ul>
+                        <li>海外本社の延長として設置</li>
+                        <li>日本在住の代表者が必要</li>
+                        <li>登記簿翻訳等の整備</li>
+                        <li>ローカルコンプライアンス構築</li>
+                        <li>税務登録支援</li>
+                    </ul>
+                </div>
+                <div class="company-card">
+                    <h3>📊 一般社団法人</h3>
+                    <div class="price">起価 ¥180,000</div>
+                    <ul>
+                        <li>非営利型の法人形態</li>
+                        <li>最低資本金不要</li>
+                        <li>NPO・協会に適合</li>
+                        <li>税務優遇の可能性</li>
+                        <li>コミュニティ志向</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">サービスパッケージ</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>エッセンシャル</h3>
+                    <div class="price">¥150,000~</div>
+                    <ul>
+                        <li>✓ 商号調査</li>
+                        <li>✓ 定款作成</li>
+                        <li>✓ 登記申請</li>
+                        <li>✓ 印鑑作成</li>
+                        <li>✓ 基本相談</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">相談する</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>ビジネス立ち上げ</h3>
+                    <div class="price">¥300,000~</div>
+                    <ul>
+                        <li>✓ エッセンシャル全て</li>
+                        <li>✓ AI事業計画書</li>
+                        <li>✓ 銀行口座開設支援</li>
+                        <li>✓ 税務届出</li>
+                        <li>✓ 経営・管理ビザ連携</li>
+                        <li>✓ 事務所選定相談</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">人気プラン</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>プレミアム設立</h3>
+                    <div class="price">¥500,000~</div>
+                    <ul>
+                        <li>✓ 立ち上げ全て</li>
+                        <li>✓ バーチャルオフィス手配</li>
+                        <li>✓ 会計導入・研修</li>
+                        <li>✓ 就業規則作成</li>
+                        <li>✓ 労務コンプライアンス</li>
+                        <li>✓ 6ヶ月の伴走支援</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">フルサービス</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">必要情報</h2>
+            <div class="documents-list">
+                <ul>
+                    <li>📋 商号（候補3件）</li>
+                    <li>🏢 事業所在地</li>
+                    <li>💰 資本金額</li>
+                    <li>👥 役員情報・住所</li>
+                    <li>📞 連絡先</li>
+                    <li>🎯 事業目的（詳細）</li>
+                    <li>📅 事業年度</li>
+                    <li>🆔 本人確認書類</li>
+                    <li>📜 印鑑登録証明書</li>
+                    <li>🏦 資本金払込口座情報</li>
+                    <li>🏠 役員の住民票</li>
+                    <li>📝 委任状（該当時）</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section-title">設立プロセス</h2>
+            <div class="process-steps">
+                <div class="process-step"><div class="step-number">1</div><div class="step-content"><h3>計画・戦略策定</h3><p>目標整理と形態選定、AIで事業計画を作成。</p></div></div>
+                <div class="process-step"><div class="step-number">2</div><div class="step-content"><h3>書類準備</h3><p>定款・申請書等を作成し、AIで整合性チェック。</p></div></div>
+                <div class="process-step"><div class="step-number">3</div><div class="step-content"><h3>公証（KK）</h3><p>株式会社は定款認証を実施。日程手配含めて支援。</p></div></div>
+                <div class="process-step"><div class="step-number">4</div><div class="step-content"><h3>資本金払込</h3><p>払込と証明取得をサポート。</p></div></div>
+                <div class="process-step"><div class="step-number">5</div><div class="step-content"><h3>法務局登記</h3><p>申請から完了まで1〜2週間が目安。</p></div></div>
+                <div class="process-step"><div class="step-number">6</div><div class="step-content"><h3>税務・口座・会計</h3><p>税務届出、印鑑証明、銀行口座、会計体制整備。</p></div></div>
+                <div class="process-step"><div class="step-number">7</div><div class="step-content"><h3>継続支援</h3><p>コンプライアンス・ビザ連携・成長支援を提供。</p></div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="pricing-table" style="grid-template-columns: 1fr; gap: 1rem;">
+                <div class="pricing-card" style="text-align:left;"><h3>登記はどのくらい？</h3><p>初回相談から3〜6週間、登記自体は1〜2週間が一般的です。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>KKとGKの違いは？</h3><p>KKは社会的信用が高く要件が重め、GKは低コストで柔軟。目的と規模で選定します。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>資本金はいくら必要？</h3><p>法的には¥1で可。経管ビザを見据えるなら¥500万以上を推奨。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>外国人は取締役になれる？</h3><p>可能。日本在住の役員が少なくとも1名必要。ビザ要件にも留意。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>オフィスは必要？</h3><p>登記住所は必須（自社・シェア・バーチャル可）。要件に適合する選定を支援。</p></div>
+                <div class="pricing-card" style="text-align:left;"><h3>銀行口座は開ける？</h3><p>紹介状・必要資料整備で通過率向上を支援します。</p></div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>日本での会社設立を、最短ルートで</h2>
+            <p>無料相談で最適な形態・プロセスをご提案します</p>
+            <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" class="cta-button" style="background:white;color:#f5576c;" target="_blank" rel="noopener noreferrer">無料相談を予約</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">メール: <a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a></p>
+        </div>
+    </div>
+
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 20px; text-align: center; margin-top: 80px;">
+        <h2 style="color: white; font-size: 2em; margin-bottom: 20px;">今すぐ始めませんか？</h2>
+        <p style="color: white; font-size: 1.2em; margin-bottom: 30px;">無料相談のお問い合わせはこちら</p>
+        <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" style="background: #f59e0b; color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-size: 1.1em; font-weight: bold;" target="_blank" rel="noopener noreferrer">今すぐ相談</a>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Mayuha 行政書士事務所. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">行政書士登録｜大阪</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = this.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
+    </script>
+</body>
+</html>
+

@@ -5,7 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商业咨询 - Mayuha Japan Gateway</title>
     <style>
-    /* ... (styles go here, same as original) ... */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+        .header { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: white; text-decoration: none; transition: opacity 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
+        .lang-switcher { display: flex; gap: 10px; }
+        .lang-btn { padding: 5px 10px; border: 1px solid white; background: transparent; color: white; text-decoration: none; border-radius: 3px; font-size: 0.9rem; display: inline-block; }
+        .lang-btn:hover { opacity: 0.8; } .lang-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .hero { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 8rem 2rem 4rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInUp 0.8s ease-out; }
+        .hero p { font-size: 1.3rem; opacity: 0.9; max-width: 800px; margin: 0 auto; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; margin-bottom: 1rem; color: #00f2fe; border-bottom: 3px solid #00f2fe; padding-bottom: 0.5rem; }
+        .consulting-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .service-card { background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%); border-radius: 15px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s; border: 2px solid #4facfe; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(79, 172, 254, 0.2); }
+        .service-card h3 { color: #00f2fe; margin-bottom: 1rem; font-size: 1.6rem; }
+        .service-card .price { font-size: 1.4rem; font-weight: bold; color: #4facfe; margin-bottom: 1rem; }
+        .service-card ul { list-style: none; padding: 0; }
+        .service-card ul li { padding: 0.6rem 0; padding-left: 1.5rem; position: relative; }
+        .service-card ul li:before { content: "✓"; position: absolute; left: 0; color: #00f2fe; font-weight: bold; }
+        .pricing-table { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .pricing-card { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 2rem; text-align: center; transition: all 0.3s; }
+        .pricing-card:hover { border-color: #00f2fe; box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2); }
+        .pricing-card.featured { border-color: #4facfe; transform: scale(1.05); }
+        .pricing-card h3 { color: #00f2fe; font-size: 1.5rem; margin-bottom: 1rem; }
+        .pricing-card .price { font-size: 2.5rem; font-weight: bold; color: #4facfe; margin: 1rem 0; }
+        .pricing-card ul { list-style: none; padding: 0; margin: 2rem 0; text-align: left; }
+        .pricing-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .expertise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+        .expertise-item { background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%); border-radius: 10px; padding: 1.5rem; text-align: center; transition: transform 0.3s; }
+        .expertise-item:hover { transform: translateY(-5px); }
+        .expertise-item .icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .expertise-item h4 { color: #00f2fe; margin-bottom: 0.5rem; }
+        .process-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+        .process-step { display: flex; gap: 2rem; align-items: flex-start; }
+        .step-number { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; flex-shrink: 0; }
+        .step-content h3 { color: #00f2fe; margin-bottom: 0.5rem; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; border: none; cursor: pointer; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4); }
+        .cta-section { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 20px; margin-top: 4rem; }
+        .cta-section h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .ai-badge { display: inline-block; background: #ffd700; color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
+        .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
+        .case-study { background: linear-gradient(135deg, #f0f9ff 0%, #e0f7ff 100%); border-radius: 15px; padding: 2rem; margin-top: 2rem; border-left: 5px solid #4facfe; }
+        .case-study h4 { color: #00f2fe; margin-bottom: 1rem; font-size: 1.3rem; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } }
     </style>
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CTSM9J2ZVT"></script>
@@ -27,21 +79,233 @@
                 <li><a href="#contact">联系我们</a></li>
             </ul>
             <div class="lang-switcher">
-                <a href="/index.html" class="lang-btn">EN</a>
-                <button class="lang-btn" disabled>JP</button>
-                <a href="/index-zh.html" class="lang-btn">中文</a>
+                <a href="/services/consulting.html" class="lang-btn">EN</a>
+                <a href="/services/consulting-ja.html" class="lang-btn">JP</a>
+                <a href="/services/consulting-zh.html" class="lang-btn" style="background:#fff;color:#00f2fe;">中文</a>
             </div>
         </nav>
     </header>
+
     <section class="hero">
         <span class="ai-badge">🚀 AI驱动战略</span>
         <h1>商业咨询</h1>
-        <p>借助AI增强的市场情报，为在日本发展您的业务提供战略指导</p>
+        <p>以AI增强的市场情报与本地实务经验，为您在日本的增长提供战略支持</p>
     </section>
-    <!-- ... (rest of the content translated similarly) ... -->
+
+    <div class="container">
+        <section class="section" id="services">
+            <h2 class="section-title">我们的咨询服务</h2>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">无论是进入日本市场还是拓展现有业务，我们依托AI分析与15+年本地经验，提供全面的商业咨询服务。</p>
+
+            <div class="consulting-services">
+                <div class="service-card">
+                    <h3>🎯 市场进入策略</h3>
+                    <div class="price">起价 ¥200,000</div>
+                    <ul>
+                        <li>市场研究与分析</li>
+                        <li>竞争格局评估</li>
+                        <li>进入策略制定</li>
+                        <li>法规合规规划</li>
+                        <li>合作伙伴识别</li>
+                        <li>AI驱动市场情报</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>📊 商业计划</h3>
+                    <div class="price">起价 ¥150,000</div>
+                    <ul>
+                        <li>完整商业计划书</li>
+                        <li>财务预测与建模</li>
+                        <li>上市（Go-to-Market）策略</li>
+                        <li>投资材料准备</li>
+                        <li>AI生成市场数据</li>
+                        <li>风险评估与缓解</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🤝 合作与伙伴关系</h3>
+                    <div class="price">起价 ¥250,000</div>
+                    <ul>
+                        <li>合作方识别与尽调</li>
+                        <li>合作架构设计</li>
+                        <li>谈判支持</li>
+                        <li>合同审阅与咨询</li>
+                        <li>合资公司推进</li>
+                        <li>关系维护管理</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>💼 人事与合规</h3>
+                    <div class="price">起价 ¥180,000</div>
+                    <ul>
+                        <li>就业规章（就業規則）制定</li>
+                        <li>人事制度与政策</li>
+                        <li>劳动法合规</li>
+                        <li>外籍员工管理</li>
+                        <li>签证协调支持</li>
+                        <li>社保与薪资制度搭建</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🌐 国际化拓展</h3>
+                    <div class="price">起价 ¥300,000</div>
+                    <ul>
+                        <li>跨境战略制定</li>
+                        <li>国际贸易合规</li>
+                        <li>进出口手续</li>
+                        <li>海外子公司设立</li>
+                        <li>全球供应链优化</li>
+                        <li>多市场协同</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>🔧 运营优化</h3>
+                    <div class="price">起价 ¥220,000</div>
+                    <ul>
+                        <li>流程诊断与改进</li>
+                        <li>效率提升策略</li>
+                        <li>技术导入规划</li>
+                        <li>质量管理体系</li>
+                        <li>成本优化方案</li>
+                        <li>绩效指标体系</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">我们的行业专长</h2>
+            <div class="expertise-grid">
+                <div class="expertise-item"><div class="icon">🏭</div><h4>制造业</h4><p>产线搭建与供应链</p></div>
+                <div class="expertise-item"><div class="icon">💻</div><h4>科技</h4><p>IT服务与软件</p></div>
+                <div class="expertise-item"><div class="icon">🛍️</div><h4>电商</h4><p>在线零售与平台</p></div>
+                <div class="expertise-item"><div class="icon">🏨</div><h4>酒店与餐饮</h4><p>服务与运营</p></div>
+                <div class="expertise-item"><div class="icon">🎓</div><h4>教育</h4><p>语言学校与培训</p></div>
+                <div class="expertise-item"><div class="icon">🏥</div><h4>医疗</h4><p>医疗服务与健康</p></div>
+                <div class="expertise-item"><div class="icon">🎨</div><h4>创意产业</h4><p>设计与媒体制作</p></div>
+                <div class="expertise-item"><div class="icon">💰</div><h4>金融</h4><p>金融科技与咨询</p></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">咨询套餐</h2>
+            <div class="pricing-table">
+                <div class="pricing-card">
+                    <h3>快速起步</h3>
+                    <div class="price">¥100,000</div>
+                    <ul>
+                        <li>✓ 3次咨询（每次2小时）</li>
+                        <li>✓ 初步市场评估</li>
+                        <li>✓ 战略建议</li>
+                        <li>✓ 邮件支持（1个月）</li>
+                        <li>✓ 基础行动计划</li>
+                    </ul>
+                    <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" class="cta-button" target="_blank" rel="noopener noreferrer">立即咨询</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>增长伙伴</h3>
+                    <div class="price">¥300,000</div>
+                    <ul>
+                        <li>✓ 8次咨询（每次2小时）</li>
+                        <li>✓ 完整商业计划</li>
+                        <li>✓ 市场进入策略</li>
+                        <li>✓ AI分析支持</li>
+                        <li>✓ 优先支持（3个月）</li>
+                        <li>✓ 季度回顾会议</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">人气之选</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>战略顾问</h3>
+                    <div class="price">¥800,000</div>
+                    <ul>
+                        <li>✓ 6个月不限咨询</li>
+                        <li>✓ 专属战略顾问</li>
+                        <li>✓ 全面市场研究</li>
+                        <li>✓ 合作与融资牵线</li>
+                        <li>✓ 7x24优先支持</li>
+                        <li>✓ 董事会级别汇报</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">高端服务</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <h2 class="section-title">咨询流程</h2>
+            <div class="process-steps">
+                <div class="process-step"><div class="step-number">1</div><div class="step-content"><h3>调研与评估</h3><p>全面评估目标、现状与挑战，AI分析市场数据，提供初步洞察。</p></div></div>
+                <div class="process-step"><div class="step-number">2</div><div class="step-content"><h3>战略规划</h3><p>制定定制化战略与里程碑，辅以AI市场情报支持。</p></div></div>
+                <div class="process-step"><div class="step-number">3</div><div class="step-content"><h3>落地实施</h3><p>与团队协作推进执行，提供实操指导与问题解决。</p></div></div>
+                <div class="process-step"><div class="step-number">4</div><div class="step-content"><h3>监测与优化</h3><p>定期评审与KPI跟踪，数据驱动优化策略。</p></div></div>
+                <div class="process-step"><div class="step-number">5</div><div class="step-content"><h3>长期伙伴</h3><p>项目结束后持续提供顾问支持，应对新挑战与扩张需求。</p></div></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">成功案例</h2>
+            <div class="case-study">
+                <h4>🚀 科技初创：完成A轮融资</h4>
+                <p><strong>挑战：</strong> 越南AI初创需在日本设立并获得日本VC投资。</p>
+                <p><strong>方案：</strong> 制定市场进入策略，准备投资材料，牵线关键投资人。</p>
+                <p><strong>结果：</strong> 6个月内完成500万美元A轮融资，设立KK并获3位创始人经营管理签证。</p>
+            </div>
+            <div class="case-study">
+                <h4>🏭 制造业：供应链优化</h4>
+                <p><strong>挑战：</strong> 中国制造企业日本分公司面临合规与效率问题。</p>
+                <p><strong>方案：</strong> 全面合规审计，重构流程，引入质量管理体系。</p>
+                <p><strong>结果：</strong> 成本降低40%，获得ISO认证，产能提升60%。</p>
+            </div>
+            <div class="case-study">
+                <h4>🛍️ 电商：日本市场扩张</h4>
+                <p><strong>挑战：</strong> 跨境电商欲进入日本但缺乏本地资源。</p>
+                <p><strong>方案：</strong> 本地化策略制定，物流伙伴识别，搭建合规框架。</p>
+                <p><strong>结果：</strong> 成功上线日本市场，首年实现¥5亿GMV，与三大零售商达成合作。</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">常见问题</h2>
+            <div class="pricing-table" style="grid-template-columns: 1fr; gap: 1rem;">
+                <div class="pricing-card" style="text-align: left;"><h3>擅长哪些行业？</h3><p>覆盖科技、制造、电商、酒店、教育、医疗与专业服务等。AI与本地经验可快速理解新行业。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>AI如何提升咨询？</h3><p>AI提供实时数据、竞争情报、趋势分析与情景建模，带来更快与更数据化的建议。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>能协助融资吗？</h3><p>可制作投资材料、商业计划与财务模型，并通过网络对接日本VC、天使与战略投资者。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>是否提供持续支持？</h3><p>提供月度顾问服务，包括定期回顾、优先响应与突发问题支持。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>有何差异化优势？</h3><p>结合行政书士实务、AI技术、多语言与跨文化商业理解，提供独特价值。</p></div>
+                <div class="pricing-card" style="text-align: left;"><h3>多快可以启动？</h3><p>通常48小时内安排首次会议，一周内开始实质工作；紧急项目可加速。</p></div>
+            </div>
+        </section>
+
+        <div class="cta-section" id="contact">
+            <h2>准备好在日本加速增长了吗？</h2>
+            <p>预约一次免费的战略咨询，讨论您的业务目标</p>
+            <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" class="cta-button" style="background: white; color: #00f2fe;" target="_blank" rel="noopener noreferrer">预约免费咨询</a>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem;">或发送邮件至：<a href="mailto:info@mayuha.net" style="color: white; text-decoration: underline;">info@mayuha.net</a></p>
+        </div>
+    </div>
+
+    <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 60px 20px; text-align: center; margin-top: 80px;">
+        <h2 style="color: white; font-size: 2em; margin-bottom: 20px;">准备好开始了吗？</h2>
+        <p style="color: white; font-size: 1.2em; margin-bottom: 30px;">立即联系我们获取免费咨询</p>
+        <a href="https://calendar.app.google/spkKo6LXbXyLXj1LA" style="background: #f59e0b; color: white; padding: 15px 40px; text-decoration: none; border-radius: 5px; font-size: 1.1em; font-weight: bold;" target="_blank" rel="noopener noreferrer">立即开始</a>
+    </section>
+
+    <footer class="footer">
+        <p>© 2025 Mayuha 行政书士事务所 版权所有</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">持证行政书士｜日本大阪</p>
+    </footer>
+
     <script>
+        document.querySelectorAll('.faq-item')?.forEach(item => { item.addEventListener('click', () => { item.classList.toggle('active'); }); });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = this.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
+
         // Track calendar booking clicks
-        document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
+        document.querySelectorAll('a[href*="calendar.app.google"], a[href*="calendly.com"]').forEach(link => {
             link.addEventListener('click', function() {
                 gtag('event', 'book_appointment', {
                     'event_category': 'Booking',
