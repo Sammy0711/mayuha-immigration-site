@@ -60,7 +60,10 @@
         .cta-section p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
         .ai-badge { display: inline-block; background: #ffd700; color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; font-size: 0.9rem; margin-bottom: 1rem; }
         .footer { background: #2c3e50; color: white; padding: 2rem; text-align: center; }
-        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } }
+        .calculator-container select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        .calculator-container select:hover { border-color: #667eea; }
+        .calculator-container .form-group label input[type="checkbox"] { cursor: pointer; }
+        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } .hero p { font-size: 1rem; } .section-title { font-size: 1.8rem; } .nav-links { display: none; } .process-step { flex-direction: column; } .calculator-container { padding: 1.5rem !important; } }
     </style>
 </head>
 <body>
@@ -163,6 +166,108 @@
                         <li>資格外活動許可</li>
                         <li>在留期間更新</li>
                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="calculator">
+            <h2 class="section-title">高度専門職ポイント計算機</h2>
+            <p style="margin-top: 1rem; font-size: 1.1rem; margin-bottom: 2rem;">あなたの条件を入力して、高度専門職ビザのポイントを計算しましょう。</p>
+            
+            <div class="calculator-container" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 15px; padding: 3rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <form id="pointCalculatorForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                        <div class="form-group">
+                            <label for="education" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #667eea;">学歴</label>
+                            <select id="education" name="education" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; background: white; transition: border-color 0.3s;" required>
+                                <option value="0">選択してください</option>
+                                <option value="30">博士号</option>
+                                <option value="20">修士号</option>
+                                <option value="10">学士号</option>
+                                <option value="5">専門学校卒業</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #667eea;">職歴（年数）</label>
+                            <select id="experience" name="experience" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; background: white; transition: border-color 0.3s;" required>
+                                <option value="0">選択してください</option>
+                                <option value="15">10年以上</option>
+                                <option value="10">7年以上10年未満</option>
+                                <option value="5">5年以上7年未満</option>
+                                <option value="3">3年以上5年未満</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salary" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #667eea;">年収（万円）</label>
+                            <select id="salary" name="salary" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; background: white; transition: border-color 0.3s;" required>
+                                <option value="0">選択してください</option>
+                                <option value="50">1,000万円以上</option>
+                                <option value="40">800万円以上1,000万円未満</option>
+                                <option value="35">700万円以上800万円未満</option>
+                                <option value="30">600万円以上700万円未満</option>
+                                <option value="25">500万円以上600万円未満</option>
+                                <option value="20">400万円以上500万円未満</option>
+                                <option value="10">300万円以上400万円未満</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #667eea;">年齢</label>
+                            <select id="age" name="age" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; background: white; transition: border-color 0.3s;" required>
+                                <option value="0">選択してください</option>
+                                <option value="15">29歳以下</option>
+                                <option value="10">30歳以上34歳以下</option>
+                                <option value="5">35歳以上39歳以下</option>
+                                <option value="0">40歳以上</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="japanese" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #667eea;">日本語能力</label>
+                            <select id="japanese" name="japanese" style="width: 100%; padding: 0.8rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; background: white; transition: border-color 0.3s;" required>
+                                <option value="0">選択してください</option>
+                                <option value="15">N1（日本語能力試験1級）</option>
+                                <option value="10">N2（日本語能力試験2級）</option>
+                                <option value="5">N3（日本語能力試験3級）</option>
+                                <option value="0">N4以下またはなし</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="additional" style="display: block; margin-bottom: 0.5rem; font-weight: bold; color: #667eea;">その他の加算ポイント</label>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                <label style="font-weight: normal; cursor: pointer;">
+                                    <input type="checkbox" name="additional" value="10" style="margin-right: 0.5rem;"> 特定の資格（10点）
+                                </label>
+                                <label style="font-weight: normal; cursor: pointer;">
+                                    <input type="checkbox" name="additional" value="10" style="margin-right: 0.5rem;"> 研究実績（10点）
+                                </label>
+                                <label style="font-weight: normal; cursor: pointer;">
+                                    <input type="checkbox" name="additional" value="10" style="margin-right: 0.5rem;"> 特別加算（10点）
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="cta-button" style="font-size: 1.2rem; padding: 1.2rem 4rem;">計算する</button>
+                    </div>
+                </form>
+
+                <div id="result" style="display: none; margin-top: 3rem; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <h3 style="color: #667eea; font-size: 1.8rem; margin-bottom: 1rem; text-align: center;">計算結果</h3>
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <div style="font-size: 3rem; font-weight: bold; color: #764ba2; margin-bottom: 0.5rem;">
+                            <span id="totalPoints">0</span><span style="font-size: 1.5rem;">点</span>
+                        </div>
+                        <div id="resultStatus" style="font-size: 1.3rem; font-weight: bold; padding: 1rem; border-radius: 8px; margin-top: 1rem;"></div>
+                    </div>
+                    <div id="pointBreakdown" style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+                        <h4 style="color: #667eea; margin-bottom: 1rem;">ポイント内訳</h4>
+                        <div id="breakdownList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -272,6 +377,71 @@
     <script>
         document.querySelectorAll('.faq-item').forEach(item => { item.addEventListener('click', () => { item.classList.toggle('active'); }); });
         document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { const href = this.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.querySelector(href); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }); });
+
+        // 高度専門職ポイント計算機
+        document.getElementById('pointCalculatorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 各項目のポイントを取得
+            const education = parseInt(document.getElementById('education').value) || 0;
+            const experience = parseInt(document.getElementById('experience').value) || 0;
+            const salary = parseInt(document.getElementById('salary').value) || 0;
+            const age = parseInt(document.getElementById('age').value) || 0;
+            const japanese = parseInt(document.getElementById('japanese').value) || 0;
+            
+            // その他の加算ポイント
+            const additionalCheckboxes = document.querySelectorAll('input[name="additional"]:checked');
+            let additional = 0;
+            additionalCheckboxes.forEach(cb => {
+                additional += parseInt(cb.value);
+            });
+            
+            // 合計ポイント計算
+            const totalPoints = education + experience + salary + age + japanese + additional;
+            
+            // 結果表示
+            document.getElementById('totalPoints').textContent = totalPoints;
+            
+            // 判定結果
+            const resultStatus = document.getElementById('resultStatus');
+            const breakdownList = document.getElementById('breakdownList');
+            
+            if (totalPoints >= 80) {
+                resultStatus.textContent = '🎉 特別加算対象（80点以上）';
+                resultStatus.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                resultStatus.style.color = 'white';
+            } else if (totalPoints >= 70) {
+                resultStatus.textContent = '✅ 合格圏内（70点以上）';
+                resultStatus.style.background = '#28a745';
+                resultStatus.style.color = 'white';
+            } else {
+                resultStatus.textContent = '⚠️ 要改善（70点未満）';
+                resultStatus.style.background = '#ffc107';
+                resultStatus.style.color = '#333';
+            }
+            
+            // ポイント内訳
+            const breakdown = [
+                { label: '学歴', points: education },
+                { label: '職歴', points: experience },
+                { label: '年収', points: salary },
+                { label: '年齢', points: age },
+                { label: '日本語能力', points: japanese },
+                { label: 'その他加算', points: additional }
+            ];
+            
+            breakdownList.innerHTML = breakdown.map(item => 
+                `<div style="padding: 0.8rem; background: white; border-radius: 5px; border-left: 3px solid #667eea;">
+                    <strong>${item.label}:</strong> ${item.points}点
+                </div>`
+            ).join('');
+            
+            // 結果を表示
+            document.getElementById('result').style.display = 'block';
+            
+            // 結果までスクロール
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,64 @@
+$ErrorActionPreference = 'Stop'
+
+# タイムスタンプ生成
+$timestamp = Get-Date -Format "yyyyMMdd_HHmmss"
+$outputFile = "handover_$timestamp.json"
+
+# 現在のディレクトリ
+$baseDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+Set-Location $baseDir
+
+# 案件情報を読み込み
+$casesContent = Get-Content -Path "cases\active-cases.md" -Raw -Encoding UTF8
+
+# 最新の日報を取得
+$latestReport = Get-ChildItem -Path "daily-reports" -Filter "*.md" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+$dailyReportContent = if ($latestReport) {
+    Get-Content -Path $latestReport.FullName -Raw -Encoding UTF8
+} else {
+    "日報が見つかりませんでした"
+}
+
+# 引継ぎデータを構築
+$handoverData = [ordered]@{
+    generated_at = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    date = Get-Date -Format "yyyy-MM-dd"
+    cases = [ordered]@{
+        source_file = "cases\active-cases.md"
+        last_updated = "2025-12-01"
+        content = $casesContent
+    }
+    daily_report = [ordered]@{
+        source_file = if ($latestReport) { $latestReport.Name } else { "N/A" }
+        content = $dailyReportContent
+    }
+    summary = [ordered]@{
+        active_cases_count = ([regex]::Matches($casesContent, "## C\d+")).Count
+        completed_today = @(
+            "C002 よっしー - インボイス＆法人口座開設（投函完了）",
+            "C009 椎屋さん（対応完了）",
+            "C025 Sayeed - MTG実施完了"
+        )
+        new_cases = @(
+            "C032 Webサブスクリプションサービス（インフラ構築完了）"
+        )
+        next_steps = @(
+            "Sayeed案件のフォローアップ",
+            "よっしー案件の審査待ち（1-3週間）",
+            "Webサブスクリプションサービスのマーケティング準備"
+        )
+    }
+}
+
+# JSON形式で保存
+$handoverData | ConvertTo-Json -Depth 10 | Set-Content -Path $outputFile -Encoding UTF8
+
+Write-Host "========================================" -ForegroundColor Green
+Write-Host "引継ぎJSONファイルを生成しました" -ForegroundColor Green
+Write-Host "========================================" -ForegroundColor Green
+Write-Host "ファイル名: $outputFile" -ForegroundColor Cyan
+Write-Host "生成日時: $($handoverData.generated_at)" -ForegroundColor Cyan
+Write-Host "アクティブ案件数: $($handoverData.summary.active_cases_count)" -ForegroundColor Yellow
+Write-Host "========================================" -ForegroundColor Green
+
+
