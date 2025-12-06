@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://web.mayuha.net/sitemap.xml
+
